@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'stellaris-css.herokuapp.com',
+    'stellaris-ccs.herokuapp.com',
 ]
 
 
