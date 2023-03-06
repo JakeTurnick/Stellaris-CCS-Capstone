@@ -19,8 +19,8 @@ class Profile(models.Model):
 
 
 class Plan(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    creator = models.ForeignKey(
+    creator = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     date = models.DateField()
     title = models.CharField(max_length=255)
