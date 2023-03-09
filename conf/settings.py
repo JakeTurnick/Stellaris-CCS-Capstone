@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # Local
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
+    'heavens.apps.HeavensConfig',
 ]
 
 # https://www.django-rest-framework.org/api-guide/permissions/#setting-the-permission-policy
