@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthContextProvider";
+import StarList from "./StarList";
 
 // Getting current date
 const today = new Date()
@@ -36,21 +37,59 @@ const INITIAL_WEATHER = {
     zip: "29671",
     date: date
 }
+const INITIAL_CONSTELLATION = {
+    entityName: "Draco",
+    isStar: false
+}
+const INITIAL_STARS = [
+    {
+        name: "star name",
+        constellation: "the constellation",
+        right_ascension: 420,
+        declination: 69,
+    }
+]
 
 function AdminEntity(props) {
     const [planetForm, setPlanetForm] = useState(INITIAL_PLANET)
+    const [entityForm, setEnetityForm] = useState(INITIAL_CONSTELLATION)
+    const [stars, setStars] = useState(INITIAL_STARS)
+    const [starType, setStarType] = useState("star");
+    // const [starOrConst, setStarOrConst]
     const [moonForm, setMoonForm] = useState(INITIAL_MP)
     const [moonSRC, setMoonSRC] = useState("")
     const [weatherForm, setWeatherForm] = useState(INITIAL_WEATHER);
     const [weatherData, setWeatherData] = useState({})
 
-    const handleInput = (e) => {
+    const planetInput = (e) => {
         const { name, value } = e.target;
         setPlanetForm(prev => ({
             ...prev,
             [name]: value,
         }))
     }
+    const moonInput = (e) => {
+        const { name, value } = e.target;
+        setMoonForm(prev => ({
+            ...prev,
+            [name]: value,
+        }))
+    }
+    const weatherInput = (e) => {
+        const { name, value } = e.target;
+        setWeatherForm(prev => ({
+            ...prev,
+            [name]: value,
+        }))
+    }
+    const entityInput = (e) => {
+        const { name, value } = e.target.value;
+        setEnetityForm(prev => ({
+            ...prev,
+            [name]: value,
+        }))
+    }
+    
 
     const formatTime = (time) => {
         const splitTime = time.split(":")
@@ -117,8 +156,8 @@ function AdminEntity(props) {
                     "textColor": "white"
                 },
                 "observer": {
-                    "latitude": moonForm.lat,
-                    "longitude": moonForm.lon,
+                    "latitude": parseFloat(moonForm.lat),
+                    "longitude": parseFloat(moonForm.lon),
                     "date": moonForm.date,
                 },
                 "view": {
@@ -142,79 +181,180 @@ function AdminEntity(props) {
     }
 
     const weatherSubmit = async (e) => {
+        e.preventDefault()
+        const KEY = process.env.REACT_APP_WEATHER_API_KEY
         const WEATHER_BASE_URL = "http://api.weatherapi.com/v1";
 		const WEATHER_PARAMS =
-		`/current.json?key=7ce75041c90d4e24ade170422230503&q=${zip}&aqi=no`;
+		`/current.json?key=${KEY}&q=${weatherForm.zip}&aqi=no`;
 
         const weatherUrl = WEATHER_BASE_URL + WEATHER_PARAMS;
         console.log("total weather URL", weatherUrl)
 
         const response = await fetch(weatherUrl);
         if (!response.ok) {
-            throw new Error("could not fetch atro forecast", response);
+            throw new Error("could not fetch weather forecast", response);
         }
         const data = await response.json();
         console.log("weather data", data);
 
-        setWeatherData({
+        setWeatherData( {
             type: data.current.condition.text,
             cloud: data.current.cloud,
             feelsLike_f: data.current.feelslike_f,
             temp_f: data.current.temp_f,
         })
-        console.log("new weather object", weather)
+        console.log("new weather object", weatherData)
+
+        // Get Moon phase as well -
+        const currDT = await data.location.localtime.split(" ")
+        const currDate = currDT[0]
+
+        setMoonForm((prev) => ({
+            ...prev,
+            lat: data.location.lat,
+            long: data.location.lon,
+            date: currDate,
+        }))
+        const tonightsMoon = async () => {
+            const options = {
+                method: "POST",
+                headers: {
+                    Authorization: JSON.stringify(process.env.REACT_APP_ASTRONOMY_API_KEY)
+                },
+                body: JSON.stringify({
+                    "format": "png",
+                    "style": {
+                        "moonStyle": "default",
+                        "backgroundStyle": "stars",
+                        "backgroundColor": "black",
+                        "headingColor": "white",
+                        "textColor": "white"
+                    },
+                    "observer": {
+                        "latitude": parseFloat(moonForm.lat),
+                        "longitude": parseFloat(moonForm.lon),
+                        "date": moonForm.date,
+                    },
+                    "view": {
+                        "type": "landscape-simple",
+    
+                    }
+                })
+            };
+            const response = await fetch(
+                "https://api.astronomyapi.com/api/v2/studio/moon-phase",
+                options
+            );
+            
+            if (!response.ok) {
+                throw new Error("Could not retrieve astro info", response);
+            }
+            const data = await response.json();
+            // console.log("moon data: ", data.data)
+            setMoonSRC(await data.data.imageUrl)
+            // console.log(moonSRC)
+        }
+        tonightsMoon()
     }
+
+    const entitySubmit = async (e) => {
+        e.preventDefault()
+        const name = e.target[0].value;
+        const isStar = e.target[1].checked;
+
+        let type = ""
+        let urlParams = ""
+
+        if (isStar) {
+            urlParams = `name=${name}`
+            type = "Star"
+        } else {
+            urlParams = `constellation=${name}`
+            type = "Constellation"
+        }
+
+        const options = {
+            method: "GET",
+            headers: {
+                'X-Api-Key': process.env.REACT_APP_NINJA_API_KEY,
+            }
+        }
+        const response = await fetch(`https://api.api-ninjas.com/v1/stars?${urlParams}`, options)
+        if (!response.ok) {
+            throw new Error('Could not retrieve astro info')
+        }
+        const data = await response.json()
+        console.log("ninja data: ", data)
+        setStars(data)
+        setStarType(type)
+    }
+
 
 
     return (
         <div id="admin-entity-view">
             <h1>I am the admin view for Entities</h1>
-            <section id="planets-section">
-                <h2>Planets:</h2>
-                <form onSubmit={planetSubmit}>
-                    <label htmlFor="lon">Longitutde</label>
-                    <input type="text" name="lon" value={planetForm.lon} onChange={handleInput} />
-
-                    <label htmlFor="lat">Latitude</label>
-                    <input type="text" name="lat" value={planetForm.lat} onChange={handleInput} />
-
-                    <label htmlFor="from">From date</label>
-                    <input type="date" name="from" value={planetForm.from} onChange={handleInput} />
-
-                    <label htmlFor="to">To date:</label>
-                    <input type="date" name="to" value={planetForm.to} onChange={handleInput} />
-
-                    <label htmlFor="time">Time</label>
-                    <input type="time" name="time" value={planetForm.time} onChange={handleInput} />
-                    {/* <input type="text" name="hrs" placeholder="hours" value={planetForm.hrs} onChange={handleInput} />
-                    <input type="text" name="min" placeholder="minutes" value={planetForm.min} onChange={handleInput} />
-                    <input type="text" name="sec" placeholder="seconds" value={planetForm.sec} onChange={handleInput} /> */}
-                    <button type="submit">Get planets</button>
+            <section id="admin-weather-form">
+                <h2>Weather:</h2>
+                <form onSubmit={weatherSubmit}>
+                    <label htmlFor="zip">Zip code:</label>
+                    <input type="number" name="zip" min="0" max="99999" value={weatherForm.zip} onChange={weatherInput} />
+                    <button type="submit">Get weather</button>
                 </form>
             </section>
-            <section>
+
+            <section id="admin-moon-form">
                 <h2>Moon phase:</h2>
                 <form onSubmit={mpSubmit}>
                     <label htmlFor="lon">Longitutde</label>
-                    <input type="text" name="lon" value={moonForm.lon} onChange={handleInput} />
+                    <input type="number" name="lon" min="-180" max="180" step=".0000001" value={moonForm.lon} onChange={moonInput} />
 
                     <label htmlFor="lat">Latitude</label>
-                    <input type="text" name="lat" value={moonForm.lat} onChange={handleInput} />
+                    <input type="number" name="lat" min="-90" max="90" step=".0000001" value={moonForm.lat} onChange={moonInput} />
 
-                    <label htmlFor="from">From date</label>
-                    <input type="date" name="from" value={moonForm.date} onChange={handleInput} />
+                    <label htmlFor="date">From date</label>
+                    <input type="date" name="date" value={moonForm.date} onChange={moonInput} />
                     <button type="submit" >Get Moon Phase</button>
                 </form>
                 <h3>Moon phase results:</h3>
                 <img src={moonSRC} alt="Phase of the moon for a selected date" />
             </section>
-            <section>
-                <h2>Weather:</h2>
-                <form action="">
-                    <label htmlFor="zip">Zip code:</label>
-                    <input type="number" min="0" max="99999" value={weatherForm.zip} onChange={handleInput} />
+            
+            <section id="admin-planets-form">
+                <h2>Planets:</h2>
+                <form onSubmit={planetSubmit}>
+                    <label htmlFor="lon">Longitutde</label>
+                    <input type="text" name="lon" value={planetForm.lon} onChange={planetInput} />
+
+                    <label htmlFor="lat">Latitude</label>
+                    <input type="text" name="lat" value={planetForm.lat} onChange={planetInput} />
+
+                    <label htmlFor="from">From date</label>
+                    <input type="date" name="from" value={planetForm.from} onChange={planetInput} />
+
+                    <label htmlFor="to">To date:</label>
+                    <input type="date" name="to" value={planetForm.to} onChange={planetInput} />
+
+                    <label htmlFor="time">Time</label>
+                    <input type="time" name="time" value={planetForm.time} onChange={planetInput} />
+                    <button type="submit">Get planets</button>
                 </form>
             </section>
+
+            <section id="admin-constellation-form">
+                <h2>Stars:</h2>
+                <form onSubmit={entitySubmit}>
+                    <label htmlFor="entity-name">Name</label>
+                    <input type="text" name="entityName" value={entityForm.entityName} onChange={entityInput} />
+
+                    <label htmlFor="isStar">Is this is Star? (no = constellation)</label>
+                    <input type="checkbox" name="isStar" />
+
+                    <button type="submit">Get stars</button>
+                </form>
+            </section>
+            <StarList stars={stars} starType={starType} />
+
         </div>
     )
 }

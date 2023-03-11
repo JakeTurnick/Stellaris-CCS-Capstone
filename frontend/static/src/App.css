@@ -7,6 +7,10 @@ body {
   background-color: hsla(240, 90%, 10%, 1);
 }
 
+* > input {
+  background-color: hsla(240, 40%, 40%), 1;
+}
+
 .App {
   text-align: center;
   display: flex;
