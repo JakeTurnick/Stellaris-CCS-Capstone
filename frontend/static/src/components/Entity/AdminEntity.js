@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthContextProvider";
 import StarList from "./StarList";
+import "./admin.css";
 
 // Getting current date
 const today = new Date();
@@ -268,10 +269,10 @@ function AdminEntity(props) {
 
 		if (isStar) {
 			urlParams = `name=${name}`;
-			type = "Star";
+			type = "star";
 		} else {
 			urlParams = `constellation=${name}`;
-			type = "Constellation";
+			type = "const";
 		}
 
 		const options = {

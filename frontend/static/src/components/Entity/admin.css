@@ -1,0 +1,5 @@
+#admin-entity-view {
+    max-height: 100vh;
+    overflow: scroll;
+    margin-right: 1rem;
+}
