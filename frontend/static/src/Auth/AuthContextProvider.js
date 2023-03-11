@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 export const AuthContext = createContext();
 
+const INITIAL_USER = {};
+
 function AuthContextProvider({ children }) {
 	const [isAuth, setIsAuth] = useState(null);
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState(INITIAL_USER);
 	const navigate = useNavigate();
 
-	const login = async (e) => {
+	const login = async (user) => {
 		const options = {
 			method: "POST",
 			headers: {
@@ -25,7 +27,13 @@ function AuthContextProvider({ children }) {
 		}
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
+		console.log("login user: ", data);
+		console.log("set  ^^^ as user state");
 		setIsAuth(true);
+		setUser({
+			username: data.username,
+			isSu: data.is_superuser,
+		});
 		navigate("/");
 	};
 
@@ -47,6 +55,10 @@ function AuthContextProvider({ children }) {
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
 		setIsAuth(true);
+		setUser({
+			username: data.username,
+			isSu: data.is_superuser,
+		});
 		navigate("/");
 	};
 
@@ -62,6 +74,7 @@ function AuthContextProvider({ children }) {
 		await fetch("/dj-rest-auth/logout/", options);
 		Cookies.remove("Authorization");
 		setIsAuth(false);
+		setUser({});
 		navigate("/login");
 	};
 
@@ -78,6 +91,9 @@ function AuthContextProvider({ children }) {
 			console.log("set  ^^^ as user state");
 
 			setIsAuth(true);
+			setUser({
+				username: data.username,
+			});
 		};
 
 		getUser();
@@ -88,7 +104,7 @@ function AuthContextProvider({ children }) {
 	}
 
 	return (
-		<AuthContext.Provider value={{ isAuth, login, register, logout }}>
+		<AuthContext.Provider value={{ isAuth, user, login, register, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

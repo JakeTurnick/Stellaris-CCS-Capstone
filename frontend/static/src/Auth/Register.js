@@ -17,6 +17,7 @@ function RegisterPage(props) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log("register form", registerForm);
 		register(registerForm);
 	};
 
@@ -24,7 +25,7 @@ function RegisterPage(props) {
 		<div id="register">
 			{isAuth ? (
 				<div>
-					<h1>Looks like you're already signed in as: user</h1>
+					<h1>Looks like you're already signed in as: {user.username}</h1>
 					<button onClick={() => logout()}>Sign out</button>
 				</div>
 			) : (

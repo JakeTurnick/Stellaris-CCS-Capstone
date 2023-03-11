@@ -181,3 +181,10 @@ SITE_ID = 1
 
 # https://docs.djangoproject.com/en/4.1/topics/email/#console-backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
+    # using our own serializer insteaxd of default from dj-rest-auth
+    # 'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+}

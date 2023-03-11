@@ -5,16 +5,19 @@ from django.conf import settings
 
 # Create your models here.
 
+# ASK MADY HOW TO ADD MORE FIELDS TO THIS
+
 
 class User(AbstractUser):
-    default_zip = models.PositiveIntegerField(null=True,
-                                              validators=[MinValueValidator(1), MaxValueValidator(99999)])
+    pass
 
 
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     display_name = models.CharField(max_length=255)
+    default_zip = models.PositiveIntegerField(null=True,
+                                              validators=[MinValueValidator(1), MaxValueValidator(99999)])
 
     def __str__(self):
         return self.display_name
