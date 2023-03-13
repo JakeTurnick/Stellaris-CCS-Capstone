@@ -85,7 +85,7 @@ function AdminEntity(props) {
 		}));
 	};
 	const entityInput = (e) => {
-		const { name, value } = e.target.value;
+		const { name, value } = e.target;
 		setEnetityForm((prev) => ({
 			...prev,
 			[name]: value,

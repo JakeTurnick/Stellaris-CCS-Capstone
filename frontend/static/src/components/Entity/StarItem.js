@@ -26,7 +26,7 @@ function StarItem(props) {
 				"X-CSRFToken": Cookies.get("csrftoken"),
 			},
 			body: JSON.stringify({
-				e_type: props.type,
+				e_type: "star",
 				name: star.name,
 				date: null,
 				ra: star.right_ascension,

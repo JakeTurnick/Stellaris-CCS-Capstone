@@ -7,6 +7,7 @@ import QAM from "./components/QAM/QAM";
 import LoginPage from "./Auth/LoginPage";
 import RegisterPage from "./Auth/Register";
 import WeatherPage from "./components/Weather/WeatherPage";
+import EntityPage from "./components/Entity/EntityPage";
 import "./App.css";
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
 				<Route path="register" element={<RegisterPage />} />
 				{/* <Route path='home' element={<Home />} /> */}
 				<Route path="weather" element={<WeatherPage />} />
-				{/* <Route path='entities' element={<Entites />} /> */}
+				<Route path="entities" element={<EntityPage />} />
 				{/* DO I REALLY NEED A PROTECTED ROUTE?? PROFILE IS THE ONLY ONE <Route path='/' element={<ProtectedRoutes />} > */}
 				{/* home page */}
 				{/* </Route> */}

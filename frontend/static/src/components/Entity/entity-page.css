@@ -1,0 +1,39 @@
+.entity-search {
+    text-align: start;
+}
+
+#search-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#search-by {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#search-text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.radio-option {
+    border: 2px solid rebeccapurple;
+    border-radius: 8px;
+    padding: .5rem;
+    margin: .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-option > * {
+    padding: .25rem;
+}
+
+#searchText {
+    padding: .5rem;
+    font-size: 1.25rem;
+    width: 100%;
+}

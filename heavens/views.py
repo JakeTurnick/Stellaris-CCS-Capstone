@@ -7,10 +7,28 @@ from .serializers import EntitySerializer
 # Create your views here.
 
 
-class ListEntityAPIView(generics.ListAPIView):
+class ListAllEntityAPIView(generics.ListAPIView):
     queryset = Entity.objects.all()
     serializer_class = EntitySerializer
     permission_classes = (AllowAny,)
+
+
+class ListEntityGroupAPIView(generics.ListAPIView):
+    serializer_class = EntitySerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        group = self.kwargs['group']
+        return Entity.objects.filter(e_type=group)
+
+
+class ListEntityNameAPIView(generics.ListAPIView):
+    serializer_class = EntitySerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        name = self.kwargs['name']
+        return Entity.objects.filter(name=name)
 
 
 class RetrieveEntityAPIView(generics.RetrieveAPIView):
