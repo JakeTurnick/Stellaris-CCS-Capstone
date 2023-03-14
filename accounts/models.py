@@ -9,15 +9,19 @@ from django.conf import settings
 
 
 class User(AbstractUser):
-    pass
+    default_zip = models.PositiveIntegerField(null=True,
+                                              validators=[MinValueValidator(1), MaxValueValidator(99999)])
+
+    def __str__(self):
+        return 'I am ' + self.username
 
 
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     display_name = models.CharField(max_length=255)
-    default_zip = models.PositiveIntegerField(null=True,
-                                              validators=[MinValueValidator(1), MaxValueValidator(99999)])
+    # default_zip = models.PositiveIntegerField(null=True,
+    #                                           validators=[MinValueValidator(1), MaxValueValidator(99999)])
 
     def __str__(self):
         return self.display_name

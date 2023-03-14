@@ -16,7 +16,6 @@ from .views import (
     ListAllEntityAPIView, ListEntityGroupAPIView, ListEntityNameAPIView, RetrieveEntityAPIView,
     AddEntityAPIView, UpdateEntityAPIView,)
 
-
 urlpatterns = [
     # Any urls
     path("stars/", StarListAPIView.as_view()),

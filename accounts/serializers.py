@@ -17,6 +17,10 @@ class CustomTokenSerializer(TokenSerializer):
             ('username', 'display_name', 'is_superuser', 'default_zip',)
 
 
+class CustomUserSerializer(serializers.ModelSerializer):
+    pass
+
+
 class PlanSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source="user.username")
     creator = serializers.ReadOnlyField(source="creator.display_name")

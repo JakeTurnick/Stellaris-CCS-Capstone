@@ -50,12 +50,13 @@ class Star(models.Model):
     ly_dist = models.CharField(max_length=50)
 
     def __str__(self):
-        return (self.e_type + " | " + self.name)
+        return (self.name)
 
 
 class Constellation(models.Model):
     name = models.CharField(max_length=255)
     date = models.DateField(blank=True, null=True)
+    # img = models.CharField <- star map image src from API
     # These fields are only applicable if averaged on all the stars in constellation
     # avg_ra = models.CharField(max_length=50)
     # avg_dec = models.CharField(max_length=50)
@@ -65,7 +66,7 @@ class Constellation(models.Model):
     # ly_dist = models.CharField(max_length=50)
 
     def __str__(self):
-        return (self.e_type + " | " + self.name)
+        return (self.name)
 
 
 class Comet(models.Model):
@@ -80,7 +81,7 @@ class Comet(models.Model):
     ly_dist = models.CharField(max_length=50)
 
     def __str__(self):
-        return (self.e_type + " | " + self.name)
+        return (self.name)
 
 
 class MeteorShower(models.Model):
@@ -96,7 +97,7 @@ class MeteorShower(models.Model):
     # ly_dist = models.CharField(max_length=50)
 
     def __str__(self):
-        return (self.e_type + " | " + self.name)
+        return (self.name)
 
 
 class Planet(models.Model):
@@ -112,7 +113,7 @@ class Planet(models.Model):
     ly_dist = models.CharField(max_length=50)
 
     def __str__(self):
-        return (self.e_type + " | " + self.name)
+        return (self.name)
 
 
 # Not quite sure how to implement this one yet

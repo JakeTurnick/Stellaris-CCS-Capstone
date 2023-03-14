@@ -11,29 +11,29 @@ class EntitySerializer(serializers.ModelSerializer):
 
 class StarSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Entity
+        model = Star
         fields = '__all__'
 
 
 class ConstellationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Entity
+        model = Constellation
         fields = '__all__'
 
 
 class CometSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Entity
+        model = Comet
         fields = '__all__'
 
 
 class MeteorShowerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Entity
+        model = MeteorShower
         fields = '__all__'
 
 
 class PlanetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Entity
+        model = Planet
         fields = '__all__'

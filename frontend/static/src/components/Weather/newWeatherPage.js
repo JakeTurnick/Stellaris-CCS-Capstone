@@ -44,7 +44,7 @@ function NewWeatherPage(props) {
 	const [weatherToday, setWeatherToday] = useState({});
 	const [weatherWeek, setWeatherWeek] = useState(null);
 	const [weatherLookup, setWeatherLookup] = useState({});
-	const [dummy, setDummy] = useState();
+	const [dummy, setDummy] = useState([]);
 
 	const moonInput = (e) => {
 		const { name, value } = e.target;
@@ -166,9 +166,9 @@ function NewWeatherPage(props) {
 		}
 		const data = await response.json();
 		console.log("weekly weather", await data);
-		setWeatherWeek(await data);
+		// setWeatherWeek(await data);
 
-		setWeatherData(await data);
+		// setWeatherData(await data);
 		// setWeatherData({
 		// 	type: data.current.condition.text,
 		// 	cloud: data.current.cloud,
@@ -181,8 +181,31 @@ function NewWeatherPage(props) {
 		const currDT = await data.location.localtime.split(" ");
 		const currDate = currDT[0];
 		// console.log(currDT);
+
+		let testWeek = [];
+		const moonWeek = await data.forecast.forecastday.map(async (day) => {
+			const src = await getMoon(
+				weatherData.location.lat,
+				weatherData.location.lon,
+				day.date
+			);
+
+			const testDay = await {
+				...day,
+				src,
+			};
+			// const updatedDay = { ...day };
+			// updatedDay.src = await src;
+			testWeek.push(testDay);
+			// console.log({ testDay });
+			return testDay;
+		});
+		console.log({ moonWeek });
+		console.log({ testWeek });
+		// setDummy( testWeek);
 	};
 
+	useEffect(() => console.log(dummy), [dummy]);
 	// const weatherSubmit = async (e) => {
 	// 	if (e) {
 	// 		e.preventDefault();
@@ -454,17 +477,22 @@ function NewWeatherPage(props) {
 		}
 	}, [weatherWeek]);
 
-	const weekForecastHTML = dummy?.map((day) => (
-		<WeeklyWeatherCard
-			key={nanoid()}
-			date={day.date}
-			type={day.day.condition.text}
-			// cloud={avgCloud}
-			feelsLike_f={day.day.avgtemp_f}
-			avgtemp_f={day.day.avgtemp_f}
-			moonSRC={day.src}
-		/>
-	));
+	let weekForecastHTML;
+	useEffect(() => {
+		console.log({ dummy });
+	}, [dummy]);
+
+	// const weekForecastHTML = dummy?.map((day) => (
+	// 	<WeeklyWeatherCard
+	// 		key={nanoid()}
+	// 		date={day.date}
+	// 		type={day.day.condition.text}
+	// 		// cloud={avgCloud}
+	// 		feelsLike_f={day.day.avgtemp_f}
+	// 		avgtemp_f={day.day.avgtemp_f}
+	// 		moonSRC={day.src}
+	// 	/>
+	// ));
 
 	// console.log({ weekForecastHTML });
 
@@ -493,7 +521,7 @@ function NewWeatherPage(props) {
 				</li>
 			</ul>
 			<h3>Current view: {view}</h3>
-			{view == "today" ? (
+			{view === "today" ? (
 				<div className="weather-today">
 					<h1>Today's view</h1>
 					<form onSubmit={getTodaysWeather}>
@@ -519,7 +547,7 @@ function NewWeatherPage(props) {
 						moonSRC={moonSRC}
 					/> */}
 				</div>
-			) : view == "week" ? (
+			) : view === "week" ? (
 				<div className="weather-week">
 					<h1>This week's weather</h1>
 					<form onSubmit={getWeeksWeather}>
@@ -550,7 +578,7 @@ function NewWeatherPage(props) {
                         feelsLike_f: data.current.feelslike_f,
                         temp_f: data.current.temp_f, */}
 				</div>
-			) : view == "lookup" ? (
+			) : view === "lookup" ? (
 				<h1>Look up weather</h1>
 			) : (
 				<div></div>
