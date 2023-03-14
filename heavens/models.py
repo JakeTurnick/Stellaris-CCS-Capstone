@@ -35,3 +35,97 @@ class Entity(models.Model):
 
     def __str__(self):
         return (self.e_type + " | " + self.name)
+
+
+class Star(models.Model):
+    name = models.CharField(max_length=255)
+    constellation = models.ForeignKey(
+        'Constellation', on_delete=models.CASCADE)
+    # date = models.DateField(blank=True, null=True)
+    ra = models.CharField(max_length=50)
+    dec = models.CharField(max_length=50)
+    spec_class = models.CharField(max_length=50)
+    abs_mag = models.CharField(max_length=50)
+    app_mag = models.CharField(max_length=50)
+    ly_dist = models.CharField(max_length=50)
+
+    def __str__(self):
+        return (self.e_type + " | " + self.name)
+
+
+class Constellation(models.Model):
+    name = models.CharField(max_length=255)
+    date = models.DateField(blank=True, null=True)
+    # These fields are only applicable if averaged on all the stars in constellation
+    # avg_ra = models.CharField(max_length=50)
+    # avg_dec = models.CharField(max_length=50)
+    # spec_class = models.CharField(max_length=50)
+    # abs_mag = models.CharField(max_length=50)
+    # app_mag = models.CharField(max_length=50)
+    # ly_dist = models.CharField(max_length=50)
+
+    def __str__(self):
+        return (self.e_type + " | " + self.name)
+
+
+class Comet(models.Model):
+    name = models.CharField(max_length=255)
+    # constellation = models.ForeignKey('Constellation', on_delete=models.CASCADE)
+    date = models.DateField(blank=True, null=True)
+    ra = models.CharField(max_length=50)
+    dec = models.CharField(max_length=50)
+    spec_class = models.CharField(max_length=50)
+    abs_mag = models.CharField(max_length=50)
+    app_mag = models.CharField(max_length=50)
+    ly_dist = models.CharField(max_length=50)
+
+    def __str__(self):
+        return (self.e_type + " | " + self.name)
+
+
+class MeteorShower(models.Model):
+    name = models.CharField(max_length=255)
+    # constellation = models.ForeignKey('Constellation', on_delete=models.CASCADE)
+    date = models.DateField(blank=True, null=True)
+    ra = models.CharField(max_length=50)
+    dec = models.CharField(max_length=50)
+    # unsure if useable for Meteor Showers
+    # spec_class = models.CharField(max_length=50)
+    # abs_mag = models.CharField(max_length=50)
+    # app_mag = models.CharField(max_length=50)
+    # ly_dist = models.CharField(max_length=50)
+
+    def __str__(self):
+        return (self.e_type + " | " + self.name)
+
+
+class Planet(models.Model):
+    name = models.CharField(max_length=255)
+    constellation = models.ForeignKey(
+        'Constellation', on_delete=models.CASCADE)
+    # date = models.DateField(blank=True, null=True)
+    ra = models.CharField(max_length=50)
+    dec = models.CharField(max_length=50)
+    spec_class = models.CharField(max_length=50)
+    abs_mag = models.CharField(max_length=50)
+    app_mag = models.CharField(max_length=50)
+    ly_dist = models.CharField(max_length=50)
+
+    def __str__(self):
+        return (self.e_type + " | " + self.name)
+
+
+# Not quite sure how to implement this one yet
+# class HumanCraft(models.Model):
+#     name = models.CharField(max_length=255)
+#     constellation = models.ForeignKey('Constellation', on_delete=models.CASCADE)
+#     date = models.DateField(blank=True, null=True)
+#     ra = models.CharField(max_length=50)
+#     dec = models.CharField(max_length=50)
+#     spec_class = models.CharField(max_length=50)
+#     abs_mag = models.CharField(max_length=50)
+#     app_mag = models.CharField(max_length=50)
+#     ly_dist = models.CharField(max_length=50)
+
+#     def __str__(self):
+#         return (self.e_type + " | " + self.name)
