@@ -188,3 +188,7 @@ REST_AUTH_SERIALIZERS = {
     # using our own serializer insteaxd of default from dj-rest-auth
     # 'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
 }
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer'
+}

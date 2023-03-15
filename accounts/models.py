@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from heavens.models import Star, Constellation, Comet, MeteorShower, Planet
 
 # Create your models here.
 
@@ -9,11 +10,14 @@ from django.conf import settings
 
 
 class User(AbstractUser):
-    default_zip = models.PositiveIntegerField(null=True,
-                                              validators=[MinValueValidator(1), MaxValueValidator(99999)])
-
-    def __str__(self):
-        return 'I am ' + self.username
+    default_zip = models.CharField(max_length=5, null=True)
+    tracked_stars = models.ManyToManyField(Star, related_name="users",)
+    tracked_constellations = models.ManyToManyField(Constellation,
+                                                    related_name="users",)
+    tracked_comets = models.ManyToManyField(Comet, related_name="users",)
+    tracked_meteor_showers = models.ManyToManyField(
+        MeteorShower, related_name="users",)
+    tracked_planets = models.ManyToManyField(Planet, related_name="users",)
 
 
 class Profile(models.Model):

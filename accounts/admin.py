@@ -3,6 +3,15 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User, Profile, Plan
 
 # Register your models here.
-admin.site.register(User, UserAdmin)
+
+
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ('Additional Info', {
+         'fields': ('default_zip', 'tracked_constellations',)}),
+    )
+
+
+admin.site.register(User, CustomUserAdmin)
 admin.site.register(Profile)
 admin.site.register(Plan)

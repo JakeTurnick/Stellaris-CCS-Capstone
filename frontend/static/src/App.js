@@ -9,6 +9,7 @@ import RegisterPage from "./Auth/Register";
 import WeatherPage from "./components/Weather/WeatherPage";
 import NewWeatherPage from "./components/Weather/newWeatherPage";
 import EntityPage from "./components/Entity/EntityPage";
+import Testing from "./components/Testing/Testing";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 				<Route path="admin-entity" element={<AdminEntity />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />
+				<Route path="testing" element={<Testing />} />
 				{/* <Route path='home' element={<Home />} /> */}
 				<Route path="weather" element={<NewWeatherPage />} />
 				<Route path="entities" element={<EntityPage />} />

@@ -27,12 +27,11 @@ function AuthContextProvider({ children }) {
 		}
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
-		console.log("login user: ", data);
-		console.log("set  ^^^ as user state");
 		setIsAuth(true);
 		setUser({
 			username: data.username,
-			isSu: data.is_superuser,
+			is_superuser: data.is_superuser,
+			default_zip: data.default_zip,
 		});
 		navigate("/");
 	};

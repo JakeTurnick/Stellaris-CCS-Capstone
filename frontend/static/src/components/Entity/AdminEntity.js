@@ -296,7 +296,7 @@ function AdminEntity(props) {
 
 	return (
 		<>
-			{user.isSu ? (
+			{user.is_superuser ? (
 				<div id="admin-entity-view">
 					<h1>I am the admin view for Entities</h1>
 					<section id="admin-weather-form">
