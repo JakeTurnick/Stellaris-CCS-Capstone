@@ -55,7 +55,7 @@ class Star(models.Model):
 
 class Constellation(models.Model):
     name = models.CharField(max_length=255)
-    date = models.DateField(blank=True, null=True)
+    # date = models.DateField(blank=True, null=True)
     # img = models.CharField <- star map image src from API
     # These fields are only applicable if averaged on all the stars in constellation
     # avg_ra = models.CharField(max_length=50)

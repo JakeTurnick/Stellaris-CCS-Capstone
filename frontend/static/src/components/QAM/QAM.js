@@ -15,6 +15,11 @@ function QAM(props) {
 				<button onClick={() => navigate("/")}>Home</button>
 				<button onClick={() => navigate("/weather")}>Weather</button>
 				<button onClick={() => navigate("/entities")}>Celestial Lookup</button>
+				{isAuth ? (
+					<button onClick={() => navigate("/profile")}>My Profile</button>
+				) : (
+					<div></div>
+				)}
 				{user.is_superuser ? (
 					<button onClick={() => navigate("/admin-entity")}>Admin Panel</button>
 				) : (

@@ -20,11 +20,8 @@ class CustomTokenSerializer(TokenSerializer):
 
 
 class CustomUserDetailSerializer(UserDetailsSerializer):
-    # username = serializers.ReadOnlyField(source="user.username")
-    default_zip = serializers.ReadOnlyField(source="user.default_zip")
 
     class Meta(UserDetailsSerializer.Meta):
-        model = User
         fields = UserDetailsSerializer.Meta.fields + \
             ('default_zip',)
 
@@ -69,4 +66,28 @@ class UserConstellationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['tracked_constellations',]
+        depth = 1
+
+
+class UserStarSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['tracked_stars',]
+        depth = 1
+
+
+class UserCometSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['tracked_comets',]
+        depth = 1
+
+
+class UserMeteorShowerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['tracked_meteor_showers',]
         depth = 1

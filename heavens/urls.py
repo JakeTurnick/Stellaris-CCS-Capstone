@@ -14,13 +14,15 @@ from .views import (
     PlanetAddAPIView, PlanetUpdateAPIView, PlanetDestroyAPIView,
     # Old Entity views (any & admin)
     ListAllEntityAPIView, ListEntityGroupAPIView, ListEntityNameAPIView, RetrieveEntityAPIView,
-    AddEntityAPIView, UpdateEntityAPIView,)
+    AddEntityAPIView, UpdateEntityAPIView, StarCreateAPIView)
 
 urlpatterns = [
     # Any urls
     path("stars/", StarListAPIView.as_view()),
+    path("stars/add/", StarCreateAPIView.as_view()),
     path("stars/name/<str:name>/", StarRetrieveAPIView.as_view()),
     path("stars/<str:name>/", StarListNameAPIView.as_view()),
+
 
     path("constellations/", ConstellationListAPIView.as_view()),
     path("constellations/name/<str:name>/",

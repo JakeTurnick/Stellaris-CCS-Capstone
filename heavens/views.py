@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser
 from .models import Entity
 from .models import Star, Constellation, Comet, MeteorShower, Planet
@@ -65,6 +66,29 @@ class StarListAPIView(generics.ListAPIView):
     queryset = Star.objects.all()
     serializer_class = StarSerializer
     permission_classes = (AllowAny,)
+
+
+class StarCreateAPIView(generics.CreateAPIView):
+    queryset = Star.objects.all()
+    serializer_class = StarSerializer
+
+    def create(self, request, *args, **kwargs):
+        # get the constellation name from the request data
+        constellation_name = request.data.pop('constellation')
+
+        # try to get the existing constellation or create a new one if it doesn't exist
+        constellation, _ = Constellation.objects.get_or_create(
+            name=constellation_name)
+
+        # create the star instance with the associated constellation
+        star = Star.objects.create(
+            constellation=constellation,
+            **request.data
+        )
+
+        # serialize the created star and return the response
+        serializer = self.get_serializer(star)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class StarListNameAPIView(generics.ListAPIView):

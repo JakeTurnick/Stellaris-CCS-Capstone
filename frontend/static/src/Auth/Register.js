@@ -51,6 +51,19 @@ function RegisterPage(props) {
 							name="email"
 							value={registerForm.email}
 							onChange={handleInput}
+							placeholder="Not Required"
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="default_zip">Default Zip:</label>
+						<input
+							id="default_zip"
+							className="form-control"
+							type="text"
+							name="default_zip"
+							value={registerForm.default_zip}
+							onChange={handleInput}
+							placeholder="Not Required"
 						/>
 					</div>
 					<div className="form-group">

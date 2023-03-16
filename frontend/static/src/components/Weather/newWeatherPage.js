@@ -63,6 +63,12 @@ function NewWeatherPage(props) {
 
 	useEffect(() => {
 		// console.log("initial weather submit");
+		if (user.default_zip) {
+			setWeatherForm({
+				zip: user.default_zip,
+				date: date,
+			});
+		}
 		getTodaysWeather();
 	}, []);
 
