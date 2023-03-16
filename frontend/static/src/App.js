@@ -9,6 +9,7 @@ import RegisterPage from "./Auth/Register";
 import WeatherPage from "./components/Weather/WeatherPage";
 import NewWeatherPage from "./components/Weather/newWeatherPage";
 import EntityPage from "./components/Entity/EntityPage";
+import ProfilePage from "./components/Profile/ProfilePage";
 import Testing from "./components/Testing/Testing";
 import "./App.css";
 
@@ -26,6 +27,7 @@ function App() {
 				{/* <Route path='home' element={<Home />} /> */}
 				<Route path="weather" element={<NewWeatherPage />} />
 				<Route path="entities" element={<EntityPage />} />
+				<Route path="profile" element={<ProfilePage />} />
 				{/* DO I REALLY NEED A PROTECTED ROUTE?? PROFILE IS THE ONLY ONE <Route path='/' element={<ProtectedRoutes />} > */}
 				{/* home page */}
 				{/* </Route> */}

@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth/AuthContextProvider";
 import Cookies from "js-cookie";
+import { nanoid } from "nanoid";
 import StarList from "./StarList";
 import StarItem from "./StarItem";
 import ConstellationCard from "./cards/ConstellationCard";
@@ -85,7 +86,7 @@ function EntityPage(props) {
 	};
 
 	const cardsHTML = cards?.map((card) => (
-		<ConstellationCard name={card.name} />
+		<ConstellationCard name={card.name} entity={card} key={nanoid()} />
 	));
 
 	return (

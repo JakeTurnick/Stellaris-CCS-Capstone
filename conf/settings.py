@@ -185,6 +185,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailSerializer',
     # using our own serializer insteaxd of default from dj-rest-auth
     # 'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
 }

@@ -27,13 +27,14 @@ function AuthContextProvider({ children }) {
 		}
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
+		console.log({ data });
 		setIsAuth(true);
 		setUser({
 			username: data.username,
 			is_superuser: data.is_superuser,
 			default_zip: data.default_zip,
 		});
-		navigate("/");
+		navigate("/home");
 	};
 
 	const register = async (user) => {
@@ -58,7 +59,7 @@ function AuthContextProvider({ children }) {
 			username: data.username,
 			isSu: data.is_superuser,
 		});
-		navigate("/");
+		navigate("/home");
 	};
 
 	const logout = async () => {

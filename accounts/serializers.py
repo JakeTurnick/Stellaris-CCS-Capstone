@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Plan
-from dj_rest_auth.serializers import TokenSerializer, TokenModel
+from dj_rest_auth.serializers import TokenSerializer, TokenModel, UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from rest_framework.authtoken.models import Token
 from .models import User, Profile
@@ -17,6 +17,16 @@ class CustomTokenSerializer(TokenSerializer):
         model = Token
         fields = TokenSerializer.Meta.fields + \
             ('username', 'is_superuser', 'default_zip',)
+
+
+class CustomUserDetailSerializer(UserDetailsSerializer):
+    # username = serializers.ReadOnlyField(source="user.username")
+    default_zip = serializers.ReadOnlyField(source="user.default_zip")
+
+    class Meta(UserDetailsSerializer.Meta):
+        model = User
+        fields = UserDetailsSerializer.Meta.fields + \
+            ('default_zip',)
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
