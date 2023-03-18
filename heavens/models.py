@@ -42,12 +42,12 @@ class Star(models.Model):
     constellation = models.ForeignKey(
         'Constellation', on_delete=models.CASCADE)
     # date = models.DateField(blank=True, null=True)
-    ra = models.CharField(max_length=50)
-    dec = models.CharField(max_length=50)
-    spec_class = models.CharField(max_length=50)
-    abs_mag = models.CharField(max_length=50)
-    app_mag = models.CharField(max_length=50)
-    ly_dist = models.CharField(max_length=50)
+    right_ascension = models.CharField(max_length=50)
+    declination = models.CharField(max_length=50)
+    spectral_class = models.CharField(max_length=50)
+    absolute_magnitude = models.CharField(max_length=50)
+    apparent_magnitude = models.CharField(max_length=50)
+    distance_light_year = models.CharField(max_length=50)
 
     def __str__(self):
         return (self.name)
@@ -87,9 +87,9 @@ class Comet(models.Model):
 class MeteorShower(models.Model):
     name = models.CharField(max_length=255)
     # constellation = models.ForeignKey('Constellation', on_delete=models.CASCADE)
-    date = models.DateField(blank=True, null=True)
-    ra = models.CharField(max_length=50)
-    dec = models.CharField(max_length=50)
+    date = models.DateField(blank=True)
+    ra = models.CharField(max_length=50, null=True, blank=True)
+    dec = models.CharField(max_length=50, null=True, blank=True)
     # unsure if useable for Meteor Showers
     # spec_class = models.CharField(max_length=50)
     # abs_mag = models.CharField(max_length=50)

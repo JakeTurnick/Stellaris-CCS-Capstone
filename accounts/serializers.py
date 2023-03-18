@@ -23,7 +23,16 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
 
     class Meta(UserDetailsSerializer.Meta):
         fields = UserDetailsSerializer.Meta.fields + \
-            ('default_zip',)
+            ('default_zip', 'is_superuser')
+
+
+class ProfileDetailSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source="user.username")
+
+    class Meta:
+        model = Profile
+        fields = ["display_name", "user", "pk"]
+        # depth = 1
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -54,11 +63,11 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 class PlanSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source="user.username")
-    creator = serializers.ReadOnlyField(source="creator.display_name")
+    # creator = serializers.ReadOnlyField(source="creator.display_name")
 
     class Meta:
         model = Plan
-        fields = ['title', 'notes', 'date', 'creator', 'username']
+        fields = ['title', 'notes', 'date', 'username', 'event', 'pk']
 
 
 class UserConstellationSerializer(serializers.ModelSerializer):

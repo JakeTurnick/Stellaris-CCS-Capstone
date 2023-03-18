@@ -90,6 +90,9 @@ class StarCreateAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(star)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def bulk_create(self, request, *args, **kwargs):
+        pass
+
 
 class StarListNameAPIView(generics.ListAPIView):
     serializer_class = StarSerializer

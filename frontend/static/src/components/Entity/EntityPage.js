@@ -5,6 +5,8 @@ import { nanoid } from "nanoid";
 import StarList from "./StarList";
 import StarItem from "./StarItem";
 import ConstellationCard from "./cards/ConstellationCard";
+import MeteorShowerCard from "./cards/MeteorShowerCard";
+import EntityCard from "./cards/EntityCard";
 import "./entity-page.css";
 
 const INITIAL_SEARCH = {
@@ -24,6 +26,10 @@ function EntityPage(props) {
 	// state for stars to display on page
 	const [search, setSearch] = useState(INITIAL_SEARCH);
 	const [cards, setCards] = useState();
+	const [stars, setStars] = useState();
+	const [constellations, setConstellations] = useState();
+	const [comets, setComets] = useState();
+	const [meteorShowers, setMeteorShowers] = useState();
 
 	// Form to get entities in data base
 	// [Stars, Constellations, Meteor Showers, Comments, Planets, Human Craft]
@@ -77,16 +83,36 @@ function EntityPage(props) {
 
 		const data = await response.json();
 		console.log("entity search data", data);
-		setCards(data);
+		switch (search.searchType) {
+			case "stars":
+				setStars(data);
+				break;
+			case "constellations":
+				setConstellations(data);
+				break;
+			case "meteor-showers":
+				setMeteorShowers(data);
+				break;
+		}
+		// setCards(data);
 	};
-	// useEffect(() => (console.log(search)), [search])
 
-	const test = (e) => {
-		console.log(e.target.name);
-	};
+	const constellationsHTML = constellations?.map((card) => (
+		<ConstellationCard
+			name={card.name}
+			entity={card}
+			key={nanoid()}
+			type={search.searchType}
+		/>
+	));
 
-	const cardsHTML = cards?.map((card) => (
-		<ConstellationCard name={card.name} entity={card} key={nanoid()} />
+	const showersHTML = meteorShowers?.map((card) => (
+		<MeteorShowerCard
+			name={card.name}
+			entity={card}
+			key={nanoid()}
+			type={search.searchType}
+		/>
 	));
 
 	return (
@@ -201,7 +227,29 @@ function EntityPage(props) {
 					<button type="submit">Search!</button>
 				</form>
 			</section>
-			<section>{cardsHTML}</section>
+			{search.searchType === "stars" ? (
+				<div>
+					<h3>Display stars</h3>
+				</div>
+			) : (
+				<div></div>
+			)}
+			{search.searchType === "constellations" ? (
+				<div>
+					<h3>Display constellations</h3>
+					<section>{constellationsHTML}</section>
+				</div>
+			) : (
+				<div></div>
+			)}
+			{search.searchType === "meteor-showers" ? (
+				<div>
+					<h3>Display meteor showers</h3>
+					<section>{showersHTML}</section>
+				</div>
+			) : (
+				<div></div>
+			)}
 		</div>
 	);
 }

@@ -1,9 +1,9 @@
 import "./card.css";
 import Cookies from "js-cookie";
 
-function MeteorShowerCard(props) {
+function EntityCard(props) {
 	let capName = props.name.split(" ");
-	console.log("meteor shower:", { props });
+	console.log("entity:", { props });
 	// console.log({ capName });
 	const newName = capName.map((name) => {
 		const cap = name[0].toUpperCase();
@@ -15,7 +15,7 @@ function MeteorShowerCard(props) {
 
 	const trackEntity = async () => {
 		const payload = {
-			meteorShower: props.entity.id,
+			constellation: props.entity.id,
 		};
 		const options = {
 			method: "PUT",
@@ -25,18 +25,18 @@ function MeteorShowerCard(props) {
 			},
 			body: JSON.stringify(payload),
 		};
-		const response = await fetch("/api_v1/accs/user/meteor-showers/", options);
+		const response = await fetch(`/api_v1/accs/user/${props.type}/`, options);
 		const data = await response.json();
 		console.log({ data });
 	};
 
 	return (
 		<article className="constellation-card">
-			<h4>I am a meteor shower card</h4>
+			<h4>I am a constellation card</h4>
 			<h3>{capName}</h3>
 			<button onClick={trackEntity}>Track Entity</button>
 		</article>
 	);
 }
 
-export default MeteorShowerCard;
+export default EntityCard;

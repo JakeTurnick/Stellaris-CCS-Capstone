@@ -26,12 +26,17 @@ function MyConstellations(props) {
 	};
 
 	const constellationsHTML = entities?.constellations?.map((card) => (
-		<MyConstellationCard name={card.name} entity={card} key={nanoid()} />
+		<MyConstellationCard
+			name={card.name}
+			entity={card}
+			key={nanoid()}
+			refresh={getEntites}
+		/>
 	));
 
 	return (
 		<article>
-			<h2>These are my tracked entities:</h2>
+			<h2>These are my tracked Constellations:</h2>
 			<ul>{constellationsHTML}</ul>
 		</article>
 	);

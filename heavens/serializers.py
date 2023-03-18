@@ -13,12 +13,14 @@ class StarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Star
         fields = '__all__'
+        depth = 1
 
 
 class ConstellationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Constellation
         fields = '__all__'
+        depth = 1
 
 
 class CometSerializer(serializers.ModelSerializer):

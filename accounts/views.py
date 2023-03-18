@@ -5,7 +5,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from .models import Plan, User, Profile
 from heavens.models import (Star, Constellation, Comet, MeteorShower, Planet)
-from .serializers import (PlanSerializer, CustomUserSerializer,
+from .serializers import (CustomUserSerializer, ProfileDetailSerializer,
+                          PlanSerializer,
                           UserStarSerializer, UserConstellationSerializer,
                           UserCometSerializer, UserMeteorShowerSerializer)
 
@@ -53,6 +54,30 @@ class UserConstellationDetailAPIView(APIView):
         return Response(serializer.data)
 
 
+class UserMeteorShowerDetailAPIView(APIView):
+
+    def get(self, request):
+        serializer = UserMeteorShowerSerializer(request.user)
+        return Response(serializer.data)
+
+    def put(self, request):
+        user = request.user
+        meteor_shower_id = request.data['meteorShower']
+        meteor_shower = MeteorShower.objects.get(pk=meteor_shower_id)
+        user.tracked_meteor_showers.add(meteor_shower)
+        user.save()
+        serializer = UserMeteorShowerSerializer(user)
+        return Response(serializer.data)
+
+    def delete(self, request):
+        user = request.user
+        meteor_shower_id = request.data['meteor_shower']
+        meteor_shower = MeteorShower.objects.get(pk=meteor_shower_id)
+        user.tracked_meteor_showers.remove(meteor_shower)
+        user.save()
+        serializer = UserMeteorShowerSerializer(user)
+        return Response(serializer.data)
+
 # class UserConstellationUpdateAPIView(generics.UpdateAPIView):
 
 
@@ -72,24 +97,29 @@ class UserCometDetailAPIView(APIView):
         return Response(serializer.data)
 
 
-#   Should I create a "operation" kwarg to specify (add/remove) item
-#   OR Create a seperate view
-
-
-class UserMeteorShowerDetailAPIView(APIView):
+class UserPlanAPIView(APIView):
 
     def get(self, request):
-        serializer = UserMeteorShowerSerializer(request.user)
+        serializer = PlanSerializer(request.user)
         return Response(serializer.data)
 
-    def put(self, request):
-        user = request.user
-        meteor_shower_id = request.data['meteor_shower']
-        meteor_shower = MeteorShower.objects.get(pk=meteor_shower_id)
-        user.tracked_meteor_showers.add(meteor_shower)
-        user.save()
-        serializer = UserMeteorShowerSerializer(user)
-        return Response(serializer.data)
+    # def put(self, request):
+    #     user = request.user
+    #     plan_id = request.data['plan']
+    #     plan = Plan.objects.get(pk=plan_id)
+    #     user.plans.add(plan)
+    #     user.save()
+    #     serializer = PlanSerializer(user)
+    #     return Response(serializer.data)
+
+
+class UserProfileAPIView(generics.ListAPIView):
+    serializer_class = ProfileDetailSerializer
+
+    def get_queryset(self):
+        return Profile.objects.filter(user=self.request.user)
+#   Should I create a "operation" kwarg to specify (add/remove) item
+#   OR Create a seperate view
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -121,7 +151,7 @@ class PlanListAPIView(generics.ListAPIView):
         return Plan.objects.filter(user=self.request.user)
 
 
-class PlanDetailAPIView(generics.RetrieveAPIView):
+class PlanDetailAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = PlanSerializer
 
     def get_queryset(self):

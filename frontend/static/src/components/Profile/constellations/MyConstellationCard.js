@@ -1,4 +1,5 @@
-import "../Entity/cards/card.css";
+import "../../Entity/cards/card.css";
+
 import Cookies from "js-cookie";
 
 function MyConstellationCard(props) {
@@ -28,13 +29,14 @@ function MyConstellationCard(props) {
 		const response = await fetch("/api_v1/accs/user/constellations/", options);
 		const data = await response.json();
 		console.log({ data });
+		props.refresh();
 	};
 
 	return (
 		<article className="constellation-card">
 			<h4>I am a constellation card</h4>
 			<h3>{capName}</h3>
-			<button>Stop Tracking</button>
+			<button onClick={untrackEntity}>Stop Tracking</button>
 		</article>
 	);
 }

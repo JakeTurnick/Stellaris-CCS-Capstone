@@ -272,7 +272,7 @@ function AdminEntity(props) {
 			type = "star";
 		} else {
 			urlParams = `constellation=${name}`;
-			type = "const";
+			type = "constellation";
 		}
 
 		const options = {

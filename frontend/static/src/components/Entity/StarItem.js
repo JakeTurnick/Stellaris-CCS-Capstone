@@ -18,6 +18,26 @@ function StarItem(props) {
 
 	const postStar = async (e) => {
 		console.log(star);
+		let payload;
+
+		if (props.type === "star") {
+			payload = {
+				name: star.name.toLowerCase(),
+				constellation: star.constellation.toLowerCase(),
+				date: null,
+				right_ascension: star.right_ascension,
+				declination: star.declination,
+				spectral_class: star.spectral_class,
+				absolute_magnitude: star.absolute_magnitude,
+				apparent_magnitude: star.apparent_magnitude,
+				distance_light_year: star.distance_light_year,
+			};
+		} else if (props.type === "constellation") {
+			payload = {
+				star,
+			};
+		}
+		console.log({ payload });
 
 		const options = {
 			method: "POST",
@@ -38,9 +58,9 @@ function StarItem(props) {
 			}),
 		};
 
-		const response = await fetch("api_v1/heavens/add-entity/", options);
-		const data = await response.json();
-		console.log("star post data", data);
+		// const response = await fetch("api_v1/heavens/add-entity/", options);
+		// const data = await response.json();
+		// console.log("star post data", data);
 	};
 
 	return (

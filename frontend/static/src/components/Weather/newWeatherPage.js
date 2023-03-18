@@ -108,7 +108,7 @@ function NewWeatherPage(props) {
 		setMoonForm((prev) => ({
 			...prev,
 			lat: data.location.lat,
-			long: data.location.lon,
+			lon: data.location.lon,
 			date: currDate,
 		}));
 		const tonightsMoon = async () => {

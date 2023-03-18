@@ -2,16 +2,23 @@ import Cookies from "js-cookie";
 
 function Testing() {
 	const putTest = async () => {
+		// # constellation
+		// # right_ascension
+		// # declination
+		// # spectral_class
+		// # absolute_magnitude
+		// # apparent_magnitude
+		// # distance_light_year
 		const payload = {
-			constellation: "crazy const",
-			abs_mag: "−3.64",
-			app_mag: "1.97",
+			constellation: "another crazy const",
+			absolute_magnitude: `−3.64`,
+			apparent_magnitude: "1.97",
 			// constellation: "Ursa Minor",
-			dec: "+89° 15′ 50.9″",
-			ly_dist: "431",
-			name: "Polaris",
-			ra: "02h 31m 47.08s",
-			spec_class: "F7:Ib-IIv SB",
+			declination: `+89° 15′ 50.9″`,
+			distance_light_year: "431",
+			name: "Something",
+			right_ascension: "02h 31m 47.08s",
+			spectral_class: "F7:Ib-IIv SB",
 		};
 		const options = {
 			method: "POST",
@@ -41,7 +48,7 @@ function Testing() {
 		const data = await response.json();
 		console.log({ data });
 	};
-	return <button onClick={untrackEntity}>Test</button>;
+	return <button onClick={putTest}>Test</button>;
 }
 
 export default Testing;
