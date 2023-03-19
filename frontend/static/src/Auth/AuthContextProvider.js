@@ -33,6 +33,7 @@ function AuthContextProvider({ children }) {
 			username: data.username,
 			is_superuser: data.is_superuser,
 			default_zip: data.default_zip,
+			pk: data.pk,
 		});
 		navigate("/profile");
 	};
@@ -60,6 +61,7 @@ function AuthContextProvider({ children }) {
 			username: data.username,
 			is_superuser: data.is_superuser,
 			default_zip: data.default_zip,
+			pk: data.pk,
 		});
 		navigate("/profile");
 	};
@@ -96,6 +98,7 @@ function AuthContextProvider({ children }) {
 				username: data.username,
 				is_superuser: data.is_superuser,
 				default_zip: data.default_zip,
+				pk: data.pk,
 			});
 		};
 

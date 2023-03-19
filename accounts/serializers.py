@@ -23,7 +23,7 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
 
     class Meta(UserDetailsSerializer.Meta):
         fields = UserDetailsSerializer.Meta.fields + \
-            ('default_zip', 'is_superuser')
+            ('default_zip', 'is_superuser',)
 
 
 class ProfileDetailSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ["display_name", "user", "pk"]
+        fields = ["display_name", "user", "pk", "avatar"]
         # depth = 1
 
 

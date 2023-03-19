@@ -113,11 +113,18 @@ class UserPlanAPIView(APIView):
     #     return Response(serializer.data)
 
 
-class UserProfileAPIView(generics.ListAPIView):
+class UserProfileAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileDetailSerializer
 
     def get_queryset(self):
-        return Profile.objects.filter(user=self.request.user)
+        pk = self.kwargs['pk']
+        return Profile.objects.filter(pk=pk)
+
+# class UserProfileAPIView(generics.ListAPIView):
+#     serializer_class = ProfileDetailSerializer
+
+#     def get_queryset(self):
+#         return Profile.objects.filter(user=self.request.user)
 #   Should I create a "operation" kwarg to specify (add/remove) item
 #   OR Create a seperate view
 

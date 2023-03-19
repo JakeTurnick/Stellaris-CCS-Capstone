@@ -55,7 +55,8 @@ class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     display_name = models.CharField(max_length=255)
-    # avatar = models.ImageField(upload_to="profiles/")
+    # default_zip = models.CharField(max_length=5, null=True)
+    avatar = models.ImageField(upload_to="profiles/", null=True)
 
     def __str__(self):
         return self.display_name

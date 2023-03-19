@@ -2,6 +2,7 @@ import MyConstellations from "./constellations/MyConstellations";
 import MyMeteorShowers from "./showers/MyMeteorShowers";
 import TrackedEntities from "./TrackedEntities";
 import Plans from "./plans/Plans";
+import EditProfile from "./EditProfile";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthContextProvider";
 
@@ -16,7 +17,7 @@ function ProfilePage(props) {
                     <nav>
                         <button onClick={() => setView("tracked")} >My tracked list</button>
                         <button onClick={() => setView("plans")}>My plans list</button>
-                        <button></button>
+                        <button onClick={() => setView("edit")}>Edit my profile</button>
                     </nav>
                     { view === "tracked" ? (
                         <TrackedEntities />
@@ -25,6 +26,11 @@ function ProfilePage(props) {
                     )}
                     { view === "plans" ? (
                         <Plans />
+                    ) : (
+                        <div></div>
+                    )}
+                    { view === "edit" ? (
+                        <EditProfile />
                     ) : (
                         <div></div>
                     )}

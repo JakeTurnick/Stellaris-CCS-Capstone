@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from .views import (AddPlanAPIView, PlanListAPIView,
                     PlanDetailAPIView, MyPlanListAPIView,
@@ -13,7 +15,7 @@ from .views import (AddPlanAPIView, PlanListAPIView,
 urlpatterns = [
     path("user/add-plan/", AddPlanAPIView.as_view()),
     path("user/plans/", PlanListAPIView.as_view()),
-    path("user/profile/", UserProfileAPIView.as_view()),
+    path("user/profile/<int:pk>/", UserProfileAPIView.as_view()),
     path('user/stars/', UserStarDetailAPIView.as_view()),
     path('user/constellations/', UserConstellationDetailAPIView.as_view()),
     path('user/comets/', UserCometDetailAPIView.as_view()),
