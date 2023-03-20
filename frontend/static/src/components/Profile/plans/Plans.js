@@ -3,6 +3,7 @@ import { AuthContext } from "../../../Auth/AuthContextProvider";
 import PlanCard from "./PlanCard";
 import { nanoid } from "nanoid";
 import Cookies from "js-cookie";
+import "./plan-card.css"
 
 const INITIAL_PLAN = {
 	title: "",
@@ -29,6 +30,7 @@ function Plans(props) {
 		const response = await fetch(`/api_v1/accs/user/add-plan/`, options)
 		const data = await response.json()
 		console.log({data})
+		setCreate(false)
 	}
 	const handleInput = (e) => {
 		const {name, value} = e.target;
@@ -37,6 +39,11 @@ function Plans(props) {
           [name]: value,
         }));
     }
+
+	useEffect(() => {
+		getPlans()
+	}, [])
+	
 	const getPlans = async () => {
 		const options = {
 			method: "GET",
@@ -51,11 +58,11 @@ function Plans(props) {
 	};
 
 	const plansHTML = plans?.map((plan) => (
-		<PlanCard plan={plan} key={nanoid()} />
+		<PlanCard plan={plan} key={nanoid()} getPlans={getPlans} />
 	));
 
 	return (
-		<div>
+		<div id="plans-page">
 			<h1>I am the plans page</h1>
 			<button onClick={() => setCreate(true)}>Create new Plan</button>
 			{create ? (
@@ -77,7 +84,7 @@ function Plans(props) {
 			) : (
 				<div>
 					<button onClick={getPlans}>get plans</button>
-					<ul>
+					<ul className="plan-list">
 						{plansHTML}
 					</ul>
 				</div>

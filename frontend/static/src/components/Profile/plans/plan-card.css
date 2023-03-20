@@ -2,3 +2,57 @@
     display: flex;
     flex-direction: column;
 }
+
+/* Plans.js */
+.plan-list {
+    list-style: none;
+}
+
+/* PlanCard.js - Article */
+.plan-card {
+    border: 2px solid white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: .5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.plan-moon {
+    max-width: 300px;
+    margin: auto;
+}
+
+.edit-plan-btn {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+/* PlanCard.js - Form */
+.plan-form {
+    border: 2px solid white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: .5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.plan-form > input {
+    font-size: 1.25rem;
+}
+
+.edit-plan-title {
+    font-size: 1.5rem;
+}
+
+.edit-plan-btns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.edit-plan-btns > button {
+    width: 40%;
+}

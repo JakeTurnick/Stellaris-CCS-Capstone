@@ -1,0 +1,16 @@
+#profile-page {
+    width: 100%;
+}
+
+.profile-nav {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+}
+
+.profile-nav > button {
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 1rem;
+}

@@ -8,7 +8,7 @@ function QAM(props) {
 	const { isAuth, user, logout } = useContext(AuthContext);
 	return (
 		<div id="QAM">
-			<h1>Quick access Menu</h1>
+			<h1>Stellaris</h1>
 			<h2>Welcome - {user.username ? user.username : "to Stellaris"}</h2>
 			<nav id="main-nav">
 				{/* <button onClick={() => logout()}>My Profile</button> */}

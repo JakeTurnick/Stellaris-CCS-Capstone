@@ -190,7 +190,7 @@ function EntityPage(props) {
 						</div>
 					</section>
 					<section id="search-by">
-						<h3>Name or Date:</h3>
+						{/* <h3>Name or Date:</h3>
 						<div className="radio-option">
 							<label htmlFor="name">Search by Name</label>
 							<input
@@ -200,8 +200,8 @@ function EntityPage(props) {
 								onClick={searchInput}
 								value={"name"}
 							/>
-						</div>
-						<div className="radio-option">
+						</div> */}
+						{/* <div className="radio-option">
 							<label htmlFor="date">Search by Date (WIP)</label>
 							<input
 								type="radio"
@@ -211,7 +211,7 @@ function EntityPage(props) {
 								value={"date"}
 								disabled
 							/>
-						</div>
+						</div> */}
 					</section>
 					<section id="search-text">
 						<label htmlFor=""></label>
