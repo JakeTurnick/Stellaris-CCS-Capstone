@@ -1,7 +1,7 @@
-import MyConstellations from "./constellations/MyConstellations";
-import MyMeteorShowers from "./showers/MyMeteorShowers";
+import MyConstellations from "../constellations/MyConstellations";
+import MyMeteorShowers from "../showers/MyMeteorShowers";
 import { useContext } from "react";
-import { AuthContext } from "../../Auth/AuthContextProvider";
+import { AuthContext } from "../../../Auth/AuthContextProvider";
 
 function TrackedEntities(props) {
 	const { isAuth, user } = useContext(AuthContext);

@@ -10,7 +10,7 @@ import WeatherPage from "./components/Weather/WeatherPage";
 import NewWeatherPage from "./components/Weather/newWeatherPage";
 import EntityPage from "./components/Entity/EntityPage";
 import ProfilePage from "./components/Profile/ProfilePage";
-import TrackedEntities from "./components/Profile/TrackedEntities";
+import TrackedEntities from "./components/Profile/tracking/TrackedEntities";
 import Testing from "./components/Testing/Testing";
 import AltitudeCalc from "./components/Testing/AltitudeCalc";
 import "./App.css";

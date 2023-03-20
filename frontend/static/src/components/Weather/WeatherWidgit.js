@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Auth/AuthContextProvider";
+// import { useContext } from "react";
+// import { AuthContext } from "../../Auth/AuthContextProvider";
 
 function WeatherWidgit(props) {
 	return (

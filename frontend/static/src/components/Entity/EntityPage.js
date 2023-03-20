@@ -237,7 +237,7 @@ function EntityPage(props) {
 			{search.searchType === "constellations" ? (
 				<div>
 					<h3>Display constellations</h3>
-					<section>{constellationsHTML}</section>
+					<section className="entity-ul">{constellationsHTML}</section>
 				</div>
 			) : (
 				<div></div>
@@ -245,7 +245,7 @@ function EntityPage(props) {
 			{search.searchType === "meteor-showers" ? (
 				<div>
 					<h3>Display meteor showers</h3>
-					<section>{showersHTML}</section>
+					<section className="entity-ul">{showersHTML}</section>
 				</div>
 			) : (
 				<div></div>

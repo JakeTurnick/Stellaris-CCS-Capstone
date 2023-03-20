@@ -1,4 +1,5 @@
 import "../../Entity/cards/card.css";
+import "../tracking/tracked-card.css";
 
 import Cookies from "js-cookie";
 

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import MyConstellationCard from "./MyConstellationCard";
 import { nanoid } from "nanoid";
+import "../tracking/tracked-entites.css";
 
 function MyConstellations(props) {
 	const [entities, setEntities] = useState({});
@@ -37,7 +38,7 @@ function MyConstellations(props) {
 	return (
 		<article>
 			<h2>These are my tracked Constellations:</h2>
-			<ul>{constellationsHTML}</ul>
+			<div className="tracked-ul">{constellationsHTML}</div>
 		</article>
 	);
 }

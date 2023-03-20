@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import MyMeteorShowerCard from "./MyMeteorShowerCard";
 import { nanoid } from "nanoid";
+import "../tracking/tracked-entites.css";
 
 function MyMeteorShowers(props) {
 	const [entities, setEntities] = useState({});
@@ -37,7 +38,7 @@ function MyMeteorShowers(props) {
 	return (
 		<article>
 			<h2>These are my tracked MeteorShowers:</h2>
-			<ul>{showersHTML}</ul>
+			<div className="tracked-ul">{showersHTML}</div>
 		</article>
 	);
 }
