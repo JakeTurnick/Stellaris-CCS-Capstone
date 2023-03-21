@@ -2,6 +2,11 @@
   box-sizing: border-box;
   background-color: #000334;
   color: #AFC7BD;
+  --color-prime: #000334;
+  --color-second: #AFC7BD;
+  --color-third: #CDC6A7;
+  --color-fourth: #DC822D;
+  --color-fifth: #AE4621;
 }
 
 body {

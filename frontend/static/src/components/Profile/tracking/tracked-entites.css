@@ -1,5 +1,24 @@
+.tracked-page {
+    width: 100%;
+}
+
 .tracked-ul {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+}
+
+.tracked-nav {
+    border-bottom: 2px solid #AFC7BD;
+    width: 100%;
+    display: flex;
+}
+
+.tracked-nav > button {
+    border: none;
+    width: 100%;
+}
+
+.tracked-nav > button:hover {
+    background-color: #AFC7BD33;
 }

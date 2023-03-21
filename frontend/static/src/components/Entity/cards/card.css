@@ -1,5 +1,13 @@
 .constellation-card {
     border: 2px solid white;
+    min-width: 200px;
+    max-width: 50%;
+    margin: 1rem;
+    padding: 1rem;
+}
+.shower-card {
+    border: 2px solid white;
+    min-width: 200px;
     max-width: 50%;
     margin: 1rem;
     padding: 1rem;

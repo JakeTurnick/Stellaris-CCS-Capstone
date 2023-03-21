@@ -37,7 +37,7 @@ function MyConstellations(props) {
 
 	return (
 		<article>
-			<h2>These are my tracked Constellations:</h2>
+			{/* <h2>These are my tracked Constellations:</h2> */}
 			<div className="tracked-ul">{constellationsHTML}</div>
 		</article>
 	);

@@ -9,14 +9,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class CustomTokenSerializer(TokenSerializer):
     username = serializers.ReadOnlyField(source="user.username")
-    # display_name = serializers.ReadOnlyField(source="profile.display_name")
+    display_name = serializers.ReadOnlyField(source="profile.display_name")
     default_zip = serializers.ReadOnlyField(source="user.default_zip")
     is_superuser = serializers.ReadOnlyField(source="user.is_superuser")
 
     class Meta(TokenSerializer.Meta):
         model = Token
         fields = TokenSerializer.Meta.fields + \
-            ('username', 'is_superuser', 'default_zip',)
+            ('username', 'is_superuser', 'default_zip', 'display_name')
 
 
 class CustomUserDetailSerializer(UserDetailsSerializer):

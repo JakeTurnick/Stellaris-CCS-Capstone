@@ -2,8 +2,9 @@ import "../../Entity/cards/card.css";
 import Cookies from "js-cookie";
 
 function MyMeteorShowerCard(props) {
+	console.log({ props });
 	let capName = props.name.split(" ");
-	console.log("constellation:", { props });
+	console.log("meteor shower:", { props });
 	// console.log({ capName });
 	const newName = capName.map((name) => {
 		const cap = name[0].toUpperCase();
@@ -33,8 +34,8 @@ function MyMeteorShowerCard(props) {
 
 	return (
 		<article className="constellation-card">
-			<h4>I am a constellation card</h4>
 			<h3>{capName}</h3>
+			<p>Viewable on - {props.entity.date}</p>
 			<button onClick={untrackEntity}>Stop Tracking</button>
 		</article>
 	);

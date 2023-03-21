@@ -27,14 +27,42 @@ function ConstellationCard(props) {
 		};
 		const response = await fetch("/api_v1/accs/user/constellations/", options);
 		const data = await response.json();
-		console.log({ data });
+		// console.log({ data });
+		props.refresh();
+	};
+
+	const untrackEntity = async () => {
+		const payload = {
+			constellation: props.entity.id,
+		};
+		const options = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRFToken": Cookies.get("csrftoken"),
+			},
+			body: JSON.stringify(payload),
+		};
+		const response = await fetch("/api_v1/accs/user/constellations/", options);
+		const data = await response.json();
+		// console.log({ data });
+		props.refresh();
 	};
 
 	return (
 		<article className="constellation-card">
 			<h4>I am a constellation card</h4>
 			<h3>{capName}</h3>
-			<button onClick={trackEntity}>Track Entity</button>
+			{props.entity.is_tracked ? (
+				<div>
+					<p>This is already tracked</p>
+					<button onClick={untrackEntity}>Untrack</button>
+				</div>
+			) : (
+				<div>
+					<button onClick={trackEntity}>Track Entity</button>
+				</div>
+			)}
 		</article>
 	);
 }

@@ -36,8 +36,8 @@ function MyMeteorShowers(props) {
 	));
 
 	return (
-		<article>
-			<h2>These are my tracked MeteorShowers:</h2>
+		<article className="tracked-">
+			{/* <h2>These are my tracked MeteorShowers:</h2> */}
 			<div className="tracked-ul">{showersHTML}</div>
 		</article>
 	);

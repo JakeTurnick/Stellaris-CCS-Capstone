@@ -16,8 +16,8 @@ function ProfilePage(props) {
 		<div id="profile-page">
 			{isAuth ? (
 				<div>
-					<h1>I am the profile page</h1>
-					<nav className="profile-nav">
+					<EditProfile />
+					{/* <nav className="profile-nav">
 						<button className="a-btn" onClick={() => setView("tracked")}>
 							My tracked list
 						</button>
@@ -30,7 +30,7 @@ function ProfilePage(props) {
 					</nav>
 					{view === "tracked" ? <TrackedEntities /> : <div></div>}
 					{view === "plans" ? <Plans /> : <div></div>}
-					{view === "edit" ? <EditProfile /> : <div></div>}
+					{view === "edit" ? <EditProfile /> : <div></div>} */}
 				</div>
 			) : (
 				<div>

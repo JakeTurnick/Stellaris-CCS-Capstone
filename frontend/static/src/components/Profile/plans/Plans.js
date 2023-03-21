@@ -3,13 +3,13 @@ import { AuthContext } from "../../../Auth/AuthContextProvider";
 import PlanCard from "./PlanCard";
 import { nanoid } from "nanoid";
 import Cookies from "js-cookie";
-import "./plan-card.css"
+import "./plan-card.css";
 
 const INITIAL_PLAN = {
 	title: "",
 	date: "",
 	notes: "",
-}
+};
 
 function Plans(props) {
 	const { isAuth, user } = useContext(AuthContext);
@@ -23,27 +23,27 @@ function Plans(props) {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"X-CSRFToken": Cookies.get('csrftoken')
+				"X-CSRFToken": Cookies.get("csrftoken"),
 			},
-			body: JSON.stringify(newPlan)
-		}
-		const response = await fetch(`/api_v1/accs/user/add-plan/`, options)
-		const data = await response.json()
-		console.log({data})
-		setCreate(false)
-	}
+			body: JSON.stringify(newPlan),
+		};
+		const response = await fetch(`/api_v1/accs/user/add-plan/`, options);
+		const data = await response.json();
+		console.log({ data });
+		setCreate(false);
+	};
 	const handleInput = (e) => {
-		const {name, value} = e.target;
-        setNewPlan(prev => ({
-          ...prev,
-          [name]: value,
-        }));
-    }
+		const { name, value } = e.target;
+		setNewPlan((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
 
 	useEffect(() => {
-		getPlans()
-	}, [])
-	
+		getPlans();
+	}, []);
+
 	const getPlans = async () => {
 		const options = {
 			method: "GET",
@@ -63,33 +63,45 @@ function Plans(props) {
 
 	return (
 		<div id="plans-page">
-			<h1>I am the plans page</h1>
+			<h1>{user.username}'s Plans</h1>
 			<button onClick={() => setCreate(true)}>Create new Plan</button>
 			{create ? (
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
-                        <label htmlFor="">Title:</label>
-                        <input type="text" name="title" value={newPlan.title} onChange={handleInput} />
-                    </div>
+						<label htmlFor="">Title:</label>
+						<input
+							type="text"
+							name="title"
+							value={newPlan.title}
+							onChange={handleInput}
+						/>
+					</div>
 					<div className="form-group">
-                        <label htmlFor="">Date:</label>
-                        <input type="date" name="date" value={newPlan.date} onChange={handleInput} />
-                    </div>
+						<label htmlFor="">Date:</label>
+						<input
+							type="date"
+							name="date"
+							value={newPlan.date}
+							onChange={handleInput}
+						/>
+					</div>
 					<div className="form-group">
-                        <label htmlFor="">Notes:</label>
-                        <input type="text" name="notes" value={newPlan.notes} onChange={handleInput} />
-                    </div>
+						<label htmlFor="">Notes:</label>
+						<input
+							type="text"
+							name="notes"
+							value={newPlan.notes}
+							onChange={handleInput}
+						/>
+					</div>
 					<button type="submit">Submit new plan</button>
 				</form>
 			) : (
 				<div>
-					<button onClick={getPlans}>get plans</button>
-					<ul className="plan-list">
-						{plansHTML}
-					</ul>
+					{/* <button onClick={getPlans}>get plans</button> */}
+					<ul className="plan-list">{plansHTML}</ul>
 				</div>
 			)}
-			
 		</div>
 	);
 }

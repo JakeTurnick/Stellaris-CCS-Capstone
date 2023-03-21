@@ -27,14 +27,24 @@ function MeteorShowerCard(props) {
 		};
 		const response = await fetch("/api_v1/accs/user/meteor-showers/", options);
 		const data = await response.json();
-		console.log({ data });
+		// console.log({ data });
+		props.refresh();
 	};
 
 	return (
-		<article className="constellation-card">
-			<h4>I am a meteor shower card</h4>
+		<article className="shower-card">
 			<h3>{capName}</h3>
-			<button onClick={trackEntity}>Track Entity</button>
+			<p>Viewable on - {props.entity.date}</p>
+			{props.entity.is_tracked ? (
+				<div>
+					<p>This is already tracked</p>
+					<button>Untrack</button>
+				</div>
+			) : (
+				<div>
+					<button onClick={trackEntity}>Track Entity</button>
+				</div>
+			)}
 		</article>
 	);
 }

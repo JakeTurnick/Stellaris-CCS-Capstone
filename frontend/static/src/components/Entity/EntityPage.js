@@ -24,7 +24,7 @@ const SEARCH_TYPES = [
 
 function EntityPage(props) {
 	// state for stars to display on page
-	const [search, setSearch] = useState(INITIAL_SEARCH);
+	const [search, setSearch] = useState({ searchType: "constellations" });
 	const [cards, setCards] = useState();
 	const [stars, setStars] = useState();
 	const [constellations, setConstellations] = useState();
@@ -97,12 +97,44 @@ function EntityPage(props) {
 		// setCards(data);
 	};
 
+	const find = async (type) => {
+		const options = {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRFToken": Cookies.get("csrftoken"),
+			},
+		};
+		const response = await fetch(`api_v1/heavens/${type}`);
+		if (!response.ok) {
+			throw new Error("could not fetch entities");
+		}
+		const data = await response.json();
+		switch (type) {
+			case "constellations":
+				setConstellations(data);
+				setSearch((prev) => ({
+					...prev,
+					searchType: "constellations",
+				}));
+				break;
+			case "meteor-showers":
+				setMeteorShowers(data);
+				setSearch((prev) => ({
+					...prev,
+					searchType: "meteor-showers",
+				}));
+				break;
+		}
+	};
+
 	const constellationsHTML = constellations?.map((card) => (
 		<ConstellationCard
 			name={card.name}
 			entity={card}
 			key={nanoid()}
 			type={search.searchType}
+			refresh={() => find("constellations")}
 		/>
 	));
 
@@ -112,131 +144,28 @@ function EntityPage(props) {
 			entity={card}
 			key={nanoid()}
 			type={search.searchType}
+			refresh={() => find("meteor-showers")}
 		/>
 	));
 
 	return (
 		<div>
-			<h1>I am the Entity Page</h1>
+			<h1>View common entities in the night sky</h1>
 			<section className="entity-search">
-				<form onSubmit={searchEntity}>
-					<h3>Search By:</h3>
-					<section id="search-type">
-						<div className="radio-option">
-							<label htmlFor="stars">Stars</label>
-							<input
-								type="radio"
-								id="stars"
-								name="searchType"
-								onClick={searchInput}
-								value={"stars"}
-							/>
-							<br />
-						</div>
-						<div className="radio-option">
-							<label htmlFor="const">Constellations</label>
-							<input
-								type="radio"
-								id="const"
-								name="searchType"
-								onClick={searchInput}
-								value={"constellations"}
-							/>
-							<br />
-						</div>
-						<div className="radio-option">
-							<label htmlFor="mtshr">Meteor Showers</label>
-							<input
-								type="radio"
-								id="mtshr"
-								name="searchType"
-								onClick={searchInput}
-								value={"meteor-showers"}
-							/>
-							<br />
-						</div>
-						<div className="radio-option">
-							<label htmlFor="comet">Commets</label>
-							<input
-								type="radio"
-								id="comet"
-								name="searchType"
-								onClick={searchInput}
-								value={"comets"}
-							/>
-							<br />
-						</div>
-						<div className="radio-option">
-							<label htmlFor="plnt">Planets</label>
-							<input
-								type="radio"
-								id="plnt"
-								name="searchType"
-								onClick={searchInput}
-								value={"planets"}
-							/>
-							<br />
-						</div>
-						<div className="radio-option">
-							<label htmlFor="plnt">Human Craft</label>
-							<input
-								type="radio"
-								id="hcrft"
-								name="searchType"
-								onClick={searchInput}
-								value={"hcrft"}
-							/>
-							<br />
-						</div>
-					</section>
-					<section id="search-by">
-						{/* <h3>Name or Date:</h3>
-						<div className="radio-option">
-							<label htmlFor="name">Search by Name</label>
-							<input
-								type="radio"
-								id="name"
-								name="searchBy"
-								onClick={searchInput}
-								value={"name"}
-							/>
-						</div> */}
-						{/* <div className="radio-option">
-							<label htmlFor="date">Search by Date (WIP)</label>
-							<input
-								type="radio"
-								id="date"
-								name="searchBy"
-								onClick={searchInput}
-								value={"date"}
-								disabled
-							/>
-						</div> */}
-					</section>
-					<section id="search-text">
-						<label htmlFor=""></label>
-						<input
-							type="text"
-							id="searchText"
-							name="searchText"
-							onChange={searchInput}
-							value={search.searchText}
-							placeholder={`Leave blank for all available`}
-						/>
-					</section>
-					<button type="submit">Search!</button>
-				</form>
+				<nav className="tracked-nav">
+					<button onClick={() => find("constellations")}>Constellations</button>
+					<button onClick={() => find("meteor-showers")}>Meteor Showers</button>
+				</nav>
 			</section>
-			{search.searchType === "stars" ? (
+			{/* {search.searchType === "stars" ? (
 				<div>
 					<h3>Display stars</h3>
 				</div>
 			) : (
 				<div></div>
-			)}
+			)} */}
 			{search.searchType === "constellations" ? (
 				<div>
-					<h3>Display constellations</h3>
 					<section className="entity-ul">{constellationsHTML}</section>
 				</div>
 			) : (
@@ -244,7 +173,6 @@ function EntityPage(props) {
 			)}
 			{search.searchType === "meteor-showers" ? (
 				<div>
-					<h3>Display meteor showers</h3>
 					<section className="entity-ul">{showersHTML}</section>
 				</div>
 			) : (

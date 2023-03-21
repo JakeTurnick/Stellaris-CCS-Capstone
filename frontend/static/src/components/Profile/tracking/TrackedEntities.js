@@ -1,17 +1,28 @@
 import MyConstellations from "../constellations/MyConstellations";
 import MyMeteorShowers from "../showers/MyMeteorShowers";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../Auth/AuthContextProvider";
+import "./tracked-entites.css"
 
 function TrackedEntities(props) {
 	const { isAuth, user } = useContext(AuthContext);
+	const [view, setView] = useState();
 	return (
-		<div>
+		<div className="tracked-page">
 			{isAuth ? (
 				<div>
-					<h1>I am the profile entites page</h1>
-					<MyConstellations />
-					<MyMeteorShowers />
+					<h1>{user.username}'s Favorite Celestials</h1>
+					<nav className="tracked-nav">
+						<button onClick={() => setView("constellations")}>Constellations</button>
+						<button onClick={() => setView("meteor-showers")}>Meteor Showers</button>
+					</nav>
+					{view === "constellations" ? (
+						<MyConstellations />
+					) : <div></div>}
+					{view === "meteor-showers" ? (
+						<MyMeteorShowers />
+					) : <div></div>}
+
 				</div>
 			) : (
 				<div>
