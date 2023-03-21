@@ -6,6 +6,8 @@
 /* Plans.js */
 .plan-list {
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* PlanCard.js - Article */

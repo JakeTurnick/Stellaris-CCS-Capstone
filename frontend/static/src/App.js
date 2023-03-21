@@ -37,9 +37,9 @@ function App() {
 				</button>
 			</div>
 			<SlidingPane
-				closeIcon={<div>Close icon.</div>}
+				closeIcon={<div>Close Menu</div>}
 				isOpen={state.isPaneOpenLeft}
-				title="Quick Access Menu"
+				title=""
 				overlayClassName="left-pane"
 				from="left"
 				width="400px"

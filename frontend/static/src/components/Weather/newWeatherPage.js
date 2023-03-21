@@ -542,7 +542,7 @@ function NewWeatherPage(props) {
 						/>
 						<button type="submit">Get weather</button>
 					</form>
-					{/* <TodaysWeatherCard
+					<TodaysWeatherCard
 						date={weatherData.current.last_updated}
 						type={weatherData.current.condition.text}
 						cloud={weatherData.current.cloud}
@@ -551,7 +551,7 @@ function NewWeatherPage(props) {
 						// weatherData={weatherData}
 						// weatherForm={weatherForm}
 						moonSRC={moonSRC}
-					/> */}
+					/>
 				</div>
 			) : view === "week" ? (
 				<div className="weather-week">
@@ -648,9 +648,9 @@ function NewWeatherPage(props) {
 				</form>
 				
 			</section> */}
-			<h3>Moon phase results:</h3>
+			{/* <h3>Moon phase results:</h3>
 			<img src={moonSRC} alt="Phase of the moon for a selected date" />
-			<h3>Weather card:</h3>
+			<h3>Weather card:</h3> */}
 			{/* <WeatherCard weatherData={weatherData} weatherForm={weatherForm} moonSRC={moonSRC} /> */}
 		</div>
 	);

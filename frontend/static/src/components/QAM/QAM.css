@@ -58,3 +58,10 @@ button {
     background-color: #AE4621;
     color: #000334;
 }
+
+@media screen and (max-width: 768px) {
+    #QAM {
+        width: 80vw;
+        /* height: 100vh; */
+    }
+}

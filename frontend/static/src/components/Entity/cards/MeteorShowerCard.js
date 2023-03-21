@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 function MeteorShowerCard(props) {
 	let capName = props.name.split(" ");
-	console.log("meteor shower:", { props });
+	// console.log("meteor shower:", { props });
 	// console.log({ capName });
 	const newName = capName.map((name) => {
 		const cap = name[0].toUpperCase();
@@ -31,6 +31,24 @@ function MeteorShowerCard(props) {
 		props.refresh();
 	};
 
+	const untrackEntity = async () => {
+		const payload = {
+			meteorShower: props.entity.id,
+		};
+		const options = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRFToken": Cookies.get("csrftoken"),
+			},
+			body: JSON.stringify(payload),
+		};
+		const response = await fetch("/api_v1/accs/user/meteor-showers/", options);
+		const data = await response.json();
+		// console.log({ data });
+		props.refresh();
+	};
+
 	return (
 		<article className="shower-card">
 			<h3>{capName}</h3>
@@ -38,7 +56,7 @@ function MeteorShowerCard(props) {
 			{props.entity.is_tracked ? (
 				<div>
 					<p>This is already tracked</p>
-					<button>Untrack</button>
+					<button onClick={untrackEntity}>Untrack</button>
 				</div>
 			) : (
 				<div>

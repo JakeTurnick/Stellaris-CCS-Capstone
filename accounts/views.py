@@ -71,7 +71,7 @@ class UserMeteorShowerDetailAPIView(APIView):
 
     def delete(self, request):
         user = request.user
-        meteor_shower_id = request.data['meteor_shower']
+        meteor_shower_id = request.data['meteorShower']
         meteor_shower = MeteorShower.objects.get(pk=meteor_shower_id)
         user.tracked_meteor_showers.remove(meteor_shower)
         user.save()

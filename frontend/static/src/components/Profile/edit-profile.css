@@ -11,6 +11,9 @@
 }
 
 .profile-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     max-width: 200px;
     padding: 50px;
     border: 2px solid white;
@@ -73,4 +76,32 @@
 
 #edit-profile-img > * {
     margin: .5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .edit-profile-form {
+        flex-direction: column;
+    }
+
+    .profile-display {
+        flex-direction: column;
+        max-width: 90vw;
+        padding: 0;
+        border: none;
+        text-align: start;
+    }
+    .profile-img-wrap {
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .profile-img {
+        max-width: 100px;
+        max-height: 100px;
+        margin: auto;
+    }
+    .profile-info {
+        max-width: 90vw;
+        text-align: start;
+        padding: 0;
+    }
 }

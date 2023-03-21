@@ -37,3 +37,9 @@ body {
   background-color: red;
   width: 100%;
 } */
+
+@media screen and (max-width: 768px) {
+  .App {
+    padding-left: 10px;
+  }
+}
