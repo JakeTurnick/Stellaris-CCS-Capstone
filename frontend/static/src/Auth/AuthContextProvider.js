@@ -27,7 +27,7 @@ function AuthContextProvider({ children }) {
 		}
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
-		// console.log({ data });
+		console.log({ data });
 		setIsAuth(true);
 		setUser({
 			username: data.username,
@@ -91,7 +91,7 @@ function AuthContextProvider({ children }) {
 				return;
 			}
 			const data = await response.json();
-			// console.log("logged in user: ", data);
+			console.log("logged in user: ", data);
 
 			setIsAuth(true);
 			setUser({

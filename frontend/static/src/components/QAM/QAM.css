@@ -1,22 +1,60 @@
 #QAM {
     display: flex;
     flex-direction: column;
+    max-width: 100%;
     height: 500px;
     width: 30vw;
-    border: 2px solid white;
-    justify-content: space-between;
+}
+
+button { 
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 #main-nav {
     display: flex;
     flex-direction: column;
 }
+#main-nav > *:hover {
+    background-color: #CDC6A7;
+    color: #000334;
+}
+#profile-nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: .25rem;
+    padding-top: .25rem;
+    border-top: 1px solid white;
+}
+#profile-nav:hover {
+    background-color: #000334;
+    color: white;
+}
+#profile-nav > *:hover {
+    background-color: #CDC6A7;
+    color: #000334;
+}
 
 #footer-nav {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid;
 }
 #footer-nav > * {
     padding: .5rem 10%;
+    
+}
+#footer-nav > *:hover {
+    background-color: #AFC7BD;
+    color: #000334
+}
+#sign-out-btn {
+    margin-top: 2rem;
+}
+#sign-out-btn:hover {
+    background-color: #AE4621;
+    color: #000334;
 }

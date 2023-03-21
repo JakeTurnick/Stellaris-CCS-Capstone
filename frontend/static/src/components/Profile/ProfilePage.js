@@ -3,6 +3,7 @@ import MyMeteorShowers from "./showers/MyMeteorShowers";
 import TrackedEntities from "./tracking/TrackedEntities";
 import Plans from "./plans/Plans";
 import EditProfile from "./EditProfile";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthContextProvider";
 import "./profile-page.css";
@@ -10,6 +11,7 @@ import "./profile-page.css";
 function ProfilePage(props) {
 	const { isAuth, user } = useContext(AuthContext);
 	const [view, setView] = useState();
+	const navigate = useNavigate();
 	return (
 		<div id="profile-page">
 			{isAuth ? (
@@ -34,8 +36,14 @@ function ProfilePage(props) {
 				<div>
 					<h1>No profile</h1>
 					<p>
-						If you are seeing this - you need to <a href="/login">Log in</a> or{" "}
-						<a href="/signup">Sign up</a>
+						If you are seeing this - you need to{" "}
+						<a className="no-profile" onClick={() => navigate("/login")}>
+							Log in
+						</a>{" "}
+						or{" "}
+						<a className="no-profile" onClick={() => navigate("/register")}>
+							Sign up
+						</a>
 					</p>
 				</div>
 			)}

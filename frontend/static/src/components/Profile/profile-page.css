@@ -14,3 +14,9 @@
     font-weight: 600;
     padding: 1rem;
 }
+
+.no-profile:hover {
+    text-decoration: underline;
+    background-color: #AFC7BD;
+    color: black;
+}
