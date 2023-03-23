@@ -13,8 +13,9 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Set the broker and result backend URLs
 app.conf.update(
-    CELERY_BROKER_URL=os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
-    CELERY_RESULT_BACKEND=os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+    CELERY_BROKER_URL=os.getenv('REDIS_TLS_URL', 'redis://localhost:6379/0'),
+    CELERY_RESULT_BACKEND=os.getenv(
+        'REDIS_TLS_URL', 'redis://localhost:6379/0'),
 )
 
 app.conf.timezone = 'UTC'
