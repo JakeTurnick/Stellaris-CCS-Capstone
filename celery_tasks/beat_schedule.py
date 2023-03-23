@@ -8,7 +8,7 @@ beat_schedule = {
     # },
     'get_upcoming_plans': {
         'task': 'accounts.tasks.get_upcoming_plans',
-        'schedule': timedelta(minutes=1),
+        'schedule': timedelta(minutes=5),
     },
     # 'print_tomorrow': {
     #     'task': 'accounts.tasks.print_tomorrow',
