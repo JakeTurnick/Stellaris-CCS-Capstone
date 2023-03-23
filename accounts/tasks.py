@@ -21,20 +21,20 @@ today = date.today().strftime('%Y-%m-%d')
 tomorrow = str(date.today() + timedelta(days=1))
 
 
-@app.shared_task
-def test_text():
-    message = client.messages \
-        .create(
-            body="This is a scheduled test message",
-            from_='+18888366273',
-            to='+12036152581'
-        )
-    print(message.sid)
+# @app.shared_task
+# def test_text():
+#     message = client.messages \
+#         .create(
+#             body="This is a scheduled test message",
+#             from_='+18888366273',
+#             to='+12036152581'
+#         )
+#     print(message.sid)
 
 
-@app.shared_task
-def print_tomorrow():
-    print(str(date.today() + timedelta(days=1)), " is tomorrow's date")
+# @app.shared_task
+# def print_tomorrow():
+#     print(str(date.today() + timedelta(days=1)), " is tomorrow's date")
 
 
 @app.shared_task
@@ -52,7 +52,7 @@ def test():
 
 
 @app.shared_task
-def get_upcomming_plan():
+def get_upcoming_plans():
     plans = Plan.objects.filter(date=tomorrow)
     for plan in plans:
         print(plan)
@@ -69,4 +69,3 @@ def get_upcomming_plan():
     # get users with plans
     # check for plans within the next x time frame
     # send SMS
-    pass
