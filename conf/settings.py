@@ -53,11 +53,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'django_celery_beat',
+    "phonenumber_field",
 
     # Local
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
     'heavens.apps.HeavensConfig',
+    'celery_tasks.apps.CeleryTasksConfig',
 ]
 
 # https://www.django-rest-framework.org/api-guide/permissions/#setting-the-permission-policy

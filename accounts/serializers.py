@@ -12,11 +12,12 @@ class CustomTokenSerializer(TokenSerializer):
     display_name = serializers.ReadOnlyField(source="profile.display_name")
     default_zip = serializers.ReadOnlyField(source="user.default_zip")
     is_superuser = serializers.ReadOnlyField(source="user.is_superuser")
+    pk = serializers.ReadOnlyField(source="user.pk")
 
     class Meta(TokenSerializer.Meta):
         model = Token
         fields = TokenSerializer.Meta.fields + \
-            ('username', 'is_superuser', 'default_zip', 'display_name')
+            ('username', 'is_superuser', 'default_zip', 'display_name', 'pk')
 
 
 class CustomUserDetailSerializer(UserDetailsSerializer):
@@ -31,7 +32,8 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ["display_name", "user", "pk", "avatar"]
+        fields = ["display_name", "user", "pk",
+                  "avatar", "phone_number", "default_zip", "bio"]
         # depth = 1
 
 

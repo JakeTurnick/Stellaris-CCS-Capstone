@@ -1,3 +1,12 @@
+#entity-page {
+    width: 100%;
+}
+
+.entity-ul {
+    display: flex;
+    justify-content: center;
+}
+
 .entity-search {
     text-align: start;
 }
@@ -37,3 +46,4 @@
     font-size: 1.25rem;
     width: 100%;
 }
+

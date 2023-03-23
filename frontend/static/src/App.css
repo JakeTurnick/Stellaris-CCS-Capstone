@@ -1,10 +1,17 @@
-body {
-  background-color: hsla(240, 90%, 10%, 1);
+:root {
+  /* background-color: #000334; */
+  background-image:
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+  radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+  radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
 * {
   color: white;
-  background-color: hsla(240, 90%, 10%, 1);
+  background-color: hsla(240, 90%, 10%, 0);
 }
 
 * > input {
@@ -13,9 +20,13 @@ body {
 
 .App {
   height: 100vh;
+  width: 100vw;
   text-align: center;
   display: flex;
-  padding-left: 200px;
+  /* padding-left: 200px; */
+  padding-top: 2rem;
+  /* background-color:black; */
+  
 }
 .App > * {
   margin: 10px;
@@ -28,11 +39,38 @@ body {
 .qam-btn {
   color: #AFC7BD;
   padding: 10px 20px;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  border: none;
+}
+.qam-btn:hover {
+  background-color: #AFC7BD88;
+}
+.close-qam {
+  background-color: #00000000;
+}
+#close-qam {
+  padding: 10px 20px;
+  border-radius: .5rem;
+}
+#close-qam:hover {
+  background-color: #AFC7BD88;
 }
 
+div.slide-pane__header {
+  background-color: #000334;
+}
+div.slide-pane__content {
+  background-color: #000334;
+}
+
+#treeline {
+  position: absolute;
+  bottom: 0px;
+
+
+}
 /* .left-pane {
   background-color: red;
   width: 100%;

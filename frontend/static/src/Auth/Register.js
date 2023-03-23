@@ -6,6 +6,7 @@ import "./Auth.css";
 function RegisterPage(props) {
 	const { isAuth, user, register, logout } = useContext(AuthContext);
 	const [registerForm, setRegisterForm] = useState({});
+	const [profileForm, setProfileForm] = useState({});
 
 	const handleInput = (e) => {
 		const { name, value } = e.target;
@@ -43,30 +44,6 @@ function RegisterPage(props) {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="email">Email:</label>
-						<input
-							id="email"
-							className="form-control"
-							type="email"
-							name="email"
-							value={registerForm.email}
-							onChange={handleInput}
-							placeholder="Not Required"
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="default_zip">Default Zip:</label>
-						<input
-							id="default_zip"
-							className="form-control"
-							type="text"
-							name="default_zip"
-							value={registerForm.default_zip}
-							onChange={handleInput}
-							placeholder="Not Required"
-						/>
-					</div>
-					<div className="form-group">
 						<label htmlFor="password1">Password:</label>
 						<input
 							id="password1"
@@ -88,8 +65,46 @@ function RegisterPage(props) {
 							onChange={handleInput}
 						/>
 					</div>
+					<p>Optional Fields:</p>
+					<div className="form-group">
+						<label htmlFor="email">Email:</label>
+						<input
+							id="email"
+							className="form-control"
+							type="email"
+							name="email"
+							value={registerForm.email}
+							onChange={handleInput}
+							placeholder=""
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="default_zip">Default Zip:</label>
+						<input
+							id="default_zip"
+							className="form-control"
+							type="text"
+							name="default_zip"
+							value={registerForm.default_zip}
+							onChange={handleInput}
+							placeholder="Used for Weather & Moon phasa"
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="phone_number">Phone number:</label>
+						<input
+							id="phone_number"
+							className="form-control"
+							type="text"
+							name="phone_number"
+							value={registerForm.phone_number}
+							onChange={handleInput}
+							placeholder="Used for Notifications"
+						/>
+					</div>
+
 					<button type="submit" id="auth-submit">
-						Log in
+						Register
 					</button>
 				</form>
 			)}

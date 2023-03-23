@@ -113,6 +113,10 @@ class UserPlanAPIView(APIView):
     #     return Response(serializer.data)
 
 
+class CreateUserProfileAPIView(generics.CreateAPIView):
+    serializer_class = ProfileDetailSerializer
+
+
 class UserProfileAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileDetailSerializer
 

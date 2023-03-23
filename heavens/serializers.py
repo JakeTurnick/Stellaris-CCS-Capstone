@@ -26,9 +26,11 @@ class ConstellationSerializer(serializers.ModelSerializer):
         depth = 1
 
     def get_is_tracked(self, obj):
-        user = self.context['request'].user
-        is_tracked = user.tracked_constellations.filter(id=obj.id).exists()
-        return is_tracked
+        if not self.context['request'].user.is_anonymous:
+            user = self.context['request'].user
+            is_tracked = user.tracked_constellations.filter(id=obj.id).exists()
+            return is_tracked
+        return False
 
 
 class CometSerializer(serializers.ModelSerializer):
@@ -45,9 +47,11 @@ class MeteorShowerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_is_tracked(self, obj):
-        user = self.context['request'].user
-        is_tracked = user.tracked_meteor_showers.filter(id=obj.id).exists()
-        return is_tracked
+        if not self.context['request'].user.is_anonymous:
+            user = self.context['request'].user
+            is_tracked = user.tracked_meteor_showers.filter(id=obj.id).exists()
+            return is_tracked
+        return False
 
 
 class PlanetSerializer(serializers.ModelSerializer):

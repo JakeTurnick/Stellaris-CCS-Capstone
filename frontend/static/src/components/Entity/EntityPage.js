@@ -24,7 +24,7 @@ const SEARCH_TYPES = [
 
 function EntityPage(props) {
 	// state for stars to display on page
-	const [search, setSearch] = useState({ searchType: "constellations" });
+	const [search, setSearch] = useState({ searchType: "" });
 	const [cards, setCards] = useState();
 	const [stars, setStars] = useState();
 	const [constellations, setConstellations] = useState();
@@ -149,7 +149,7 @@ function EntityPage(props) {
 	));
 
 	return (
-		<div>
+		<div id="entity-page">
 			<h1>View common entities in the night sky</h1>
 			<section className="entity-search">
 				<nav className="tracked-nav">
@@ -157,13 +157,13 @@ function EntityPage(props) {
 					<button onClick={() => find("meteor-showers")}>Meteor Showers</button>
 				</nav>
 			</section>
-			{/* {search.searchType === "stars" ? (
+			{search.searchType === "" ? (
 				<div>
-					<h3>Display stars</h3>
+					<h3>Select a type to search by</h3>
 				</div>
 			) : (
 				<div></div>
-			)} */}
+			)}
 			{search.searchType === "constellations" ? (
 				<div>
 					<section className="entity-ul">{constellationsHTML}</section>

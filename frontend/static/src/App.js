@@ -17,32 +17,44 @@ import AltitudeCalc from "./components/Testing/AltitudeCalc";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+
+const bars = <FontAwesomeIcon className="open-qam" icon={faBars} />;
+const close = <FontAwesomeIcon className="close-qam" icon={faX} />;
 
 function App() {
-	const { isAuth } = useContext(AuthContext);
+	const { isAuth, user } = useContext(AuthContext);
 	const [state, setState] = useState({ isPaneOpenLeft: false });
 
 	return (
 		<div className="App">
-			<script
+			{/* <script
 				src="https://kit.fontawesome.com/ff4418d11d.js"
 				crossOrigin="anonymous"
-			></script>
+			></script> */}
 			<div style={{ marginTop: "32px" }}>
 				<button
 					className="qam-btn"
 					onClick={() => setState({ isPaneOpenLeft: true })}
 				>
-					<i className="fa fa-solid fa-bars"></i>
+					{bars}
 				</button>
 			</div>
 			<SlidingPane
-				closeIcon={<div>Close Menu</div>}
+				closeIcon={<div id="close-qam">{close}</div>}
 				isOpen={state.isPaneOpenLeft}
-				title=""
-				overlayClassName="left-pane"
+				title="Stellaris"
+				subtitle={
+					user.username
+						? `Welcome - ${user.username}`
+						: "Log in or Sign up below!"
+				}
+				className="left-pane"
 				from="left"
-				width="400px"
+				width="300px"
 				onRequestClose={() => setState({ isPaneOpenLeft: false })}
 			>
 				<QAM closePane={() => setState({ isPaneOpenLeft: false })} />
@@ -64,6 +76,7 @@ function App() {
 				{/* home page */}
 				{/* </Route> */}
 			</Routes>
+			<img id="treeline" src="frontend/static/src/media/treeline-silhouette.png" alt="" />
 		</div>
 	);
 }

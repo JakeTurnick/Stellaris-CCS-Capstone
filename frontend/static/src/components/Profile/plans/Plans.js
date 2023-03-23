@@ -31,6 +31,7 @@ function Plans(props) {
 		const data = await response.json();
 		console.log({ data });
 		setCreate(false);
+		getPlans();
 	};
 	const handleInput = (e) => {
 		const { name, value } = e.target;
@@ -88,7 +89,7 @@ function Plans(props) {
 					<div className="form-group">
 						<label htmlFor="">Notes:</label>
 						<input
-							type="text"
+							type="textarea"
 							name="notes"
 							value={newPlan.notes}
 							onChange={handleInput}

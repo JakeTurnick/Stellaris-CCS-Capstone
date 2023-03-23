@@ -28,14 +28,15 @@ function AuthContextProvider({ children }) {
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
 		console.log({ data });
-		setIsAuth(true);
 		setUser({
 			username: data.username,
 			is_superuser: data.is_superuser,
 			default_zip: data.default_zip,
 			pk: data.pk,
 		});
-		navigate("/profile");
+		setIsAuth(true);
+		setTimeout(navigate("/profile"), 500);
+		// navigate("/profile");
 	};
 
 	const register = async (user) => {
@@ -56,14 +57,14 @@ function AuthContextProvider({ children }) {
 		const data = await response.json();
 		Cookies.set("Authorization", `Token ${data.key}`);
 		console.log("register data:", { data });
-		setIsAuth(true);
 		setUser({
 			username: data.username,
 			is_superuser: data.is_superuser,
 			default_zip: data.default_zip,
 			pk: data.pk,
 		});
-		navigate("/profile");
+		setIsAuth(true);
+		setTimeout(navigate("/profile"), 500);
 	};
 
 	const logout = async () => {
@@ -79,7 +80,7 @@ function AuthContextProvider({ children }) {
 		Cookies.remove("Authorization");
 		setIsAuth(false);
 		setUser({});
-		navigate("/profile");
+		setTimeout(navigate("/login"), 500);
 	};
 
 	useEffect(() => {
@@ -92,14 +93,13 @@ function AuthContextProvider({ children }) {
 			}
 			const data = await response.json();
 			console.log("logged in user: ", data);
-
-			setIsAuth(true);
 			setUser({
 				username: data.username,
 				is_superuser: data.is_superuser,
 				default_zip: data.default_zip,
 				pk: data.pk,
 			});
+			setIsAuth(true);
 		};
 
 		getUser();

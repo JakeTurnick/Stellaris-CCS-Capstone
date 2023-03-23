@@ -1,8 +1,10 @@
 #login {
-    border: 2px solid white;
+    width: 100%;
+    /* border: 2px solid white; */
 }
 #register {
-    border: 2px solid white;
+    width: 100%;
+    /* border: 2px solid white; */
 }
 
 #auth-form {
@@ -29,6 +31,7 @@ form > * {
     font-size: 1rem;
     background-color: hsla(240, 40%, 40%), 1;
     color: white;
+    max-width: 500px;
 }
 .form-control:default {
     background-color: hsla(240, 40%, 40%), 1;
@@ -51,9 +54,21 @@ input::-ms-reveal {
 #auth-submit {
     background-color: black;
     color: white;
-    width: 60%;
-    align-self: center;
+    max-width: 500px;
+    align-self: flex-start;
 }
 #auth-submit:hover {
     background-color: hsla(240, 80%, 20%, .8);
+    cursor: pointer;
+}
+
+#register-redirect {
+    background-color: #AFC7BD33;
+    color: white;
+    min-width: 200px;
+    align-self: flex-start;
+}
+#register-redirect:hover {
+    background-color: hsla(240, 80%, 20%, .8);
+    cursor: pointer;
 }

@@ -1,7 +1,12 @@
 import "./card.css";
 import Cookies from "js-cookie";
+import { useContext } from "react";
+import { AuthContext } from "../../../Auth/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 
 function MeteorShowerCard(props) {
+	const { user } = useContext(AuthContext);
+	const navigate = useNavigate();
 	let capName = props.name.split(" ");
 	// console.log("meteor shower:", { props });
 	// console.log({ capName });
@@ -55,12 +60,18 @@ function MeteorShowerCard(props) {
 			<p>Viewable on - {props.entity.date}</p>
 			{props.entity.is_tracked ? (
 				<div>
-					<p>This is already tracked</p>
-					<button onClick={untrackEntity}>Untrack</button>
+					<p>Currently tracking</p>
+					<button onClick={untrackEntity}>Stop tracking?</button>
 				</div>
 			) : (
 				<div>
-					<button onClick={trackEntity}>Track Entity</button>
+					{user.username ? (
+						<button onClick={trackEntity}>Track Entity</button>
+					) : (
+						<button onClick={() => navigate("/login")}>
+							Log in to track entity
+						</button>
+					)}
 				</div>
 			)}
 		</article>

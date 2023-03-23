@@ -14,6 +14,10 @@ dj-rest-auth = "~=2.2.8"
 django-allauth = "~=0.52.0"
 pillow = "~=9.4.0"
 celery = "~=5.2.7"
+redis = "~=4.5.2"
+django-celery-beat = "~=2.5.0"
+twilio = "~=7.16.5"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 
 [dev-packages]
 autopep8 = "*"

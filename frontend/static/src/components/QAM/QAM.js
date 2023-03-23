@@ -51,18 +51,30 @@ function QAM(props) {
 
 	return (
 		<div id="QAM">
-			<h1>Stellaris</h1>
-			<h2>Welcome - {user.username ? user.username : "to Stellaris"}</h2>
+			{/* <h1>Stellaris</h1> */}
+			{/* <h2>Welcome - {user.username ? user.username : "to Stellaris"}</h2> */}
 			<nav id="main-nav">
 				{/* <button onClick={() => logout()}>My Profile</button> */}
-				<button onClick={() => goHome()}>Home</button>
-				<button onClick={() => goWeather()}>Weather</button>
-				<button onClick={() => goEntities()}>Celestial Lookup</button>
+				<button className="menu-btn" onClick={() => goHome()}>
+					Home
+				</button>
+				<button className="menu-btn" onClick={() => goWeather()}>
+					Weather
+				</button>
+				<button className="menu-btn" onClick={() => goEntities()}>
+					Celestial Lookup
+				</button>
 				{isAuth ? (
 					<div id="profile-nav">
-						<button onClick={() => goProfile()}>My Profile</button>
-						<button onClick={() => goTracked()}>Favorite Celestials</button>
-						<button onClick={() => goPlans()}>My Plans</button>
+						<button className="menu-btn" onClick={() => goProfile()}>
+							My Profile
+						</button>
+						<button className="menu-btn" onClick={() => goTracked()}>
+							Favorite Celestials
+						</button>
+						<button className="menu-btn" onClick={() => goPlans()}>
+							My Plans
+						</button>
 					</div>
 				) : (
 					<div></div>
@@ -74,13 +86,17 @@ function QAM(props) {
 				)}
 			</nav>
 			{isAuth ? (
-				<button id="sign-out-btn" onClick={() => logOut()}>
+				<button className="menu-btn" id="sign-out-btn" onClick={() => logOut()}>
 					Sign out
 				</button>
 			) : (
 				<nav id="footer-nav">
-					<button onClick={() => logIn()}>Login</button>
-					<button onClick={() => register()}>Sign up</button>
+					<button className="menu-btn" onClick={() => logIn()}>
+						Login
+					</button>
+					<button className="menu-btn" onClick={() => register()}>
+						Sign up
+					</button>
 				</nav>
 			)}
 		</div>

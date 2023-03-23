@@ -10,8 +10,8 @@ function EditProfile(props) {
 	const [preview, setPreview] = useState();
 	const [editMode, setEditMode] = useState(false);
 	const [profileForm, setProfileForm] = useState({
-		display_name: user.display_name,
-		avatar: user.avatar,
+		display_name: profile.display_name,
+		avatar: profile.avatar,
 	});
 
 	const handleInput = (e) => {
@@ -47,12 +47,14 @@ function EditProfile(props) {
 			options
 		);
 		const data = await response.json();
-		// console.log({ data });
+		console.log("profile: ", { data });
 		setProfile((prev) => ({
 			...prev,
 			display_name: data.display_name,
 			avatar: data.avatar,
+			bio: data.bio,
 		}));
+		setProfileForm(profile);
 	};
 
 	const submitProfile = async (e) => {
@@ -95,11 +97,20 @@ function EditProfile(props) {
                     </div> */}
 					<section className="edit-profile-fields">
 						<div className="form-group">
-							<label htmlFor="">Display name:</label>
+							<label htmlFor="display_name">Display name:</label>
 							<input
 								type="text"
 								name="display_name"
 								value={profileForm.display_name}
+								onChange={handleInput}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="bio">Bio:</label>
+							<textarea
+								type="textarea"
+								name="bio"
+								value={profileForm.bio}
 								onChange={handleInput}
 							/>
 						</div>
@@ -113,7 +124,7 @@ function EditProfile(props) {
 							/>
 						</div> */}
 						<div className="form-group" id="edit-profile-img">
-							<label htmlFor="">Avatar image:</label>
+							<label htmlFor="avatar">Avatar image:</label>
 							<input type="file" name="avatar" onChange={handleImage} />
 
 							{preview && (
@@ -144,17 +155,22 @@ function EditProfile(props) {
 						<h3 className="profile-user-name">{profile.username}'s Profile</h3>
 					</div>
 					<div className="profile-info">
-						<p>
-							<span className="info-field">Display name:</span>{" "}
-							{profile.display_name}
-						</p>
-						<p>
-							<span className="info-field">default zip:</span>{" "}
-							{profile.default_zip}
-						</p>
-						<p>
-							<span className="info-field">bio?</span>
-						</p>
+						<div>
+							<p className="info-title">Display name:</p>
+							<p className="info-field">
+								{profile.display_name}
+							</p>
+						</div>
+						<div>
+							<p className="info-title">Default zip:</p>
+							<p className="info-field">{profile.default_zip}</p>
+						</div>
+						<div>
+							<p className="info-title">Bio:</p>
+							<p className="info-field">{profile.bio}</p>
+						</div>
+
+						
 						<button className="edit-info-btn" onClick={() => setEditMode(true)}>
 							Edit info
 						</button>

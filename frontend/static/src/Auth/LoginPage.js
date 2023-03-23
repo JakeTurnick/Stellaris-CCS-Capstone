@@ -61,6 +61,8 @@ function LoginPage(props) {
 					<button type="submit" id="auth-submit">
 						Log in
 					</button>
+					<h3>Don't have an account?</h3>
+					<button id="register-redirect">Register</button>
 				</form>
 			)}
 		</div>

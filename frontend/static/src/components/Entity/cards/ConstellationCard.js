@@ -1,10 +1,13 @@
 import "./card.css";
 import Cookies from "js-cookie";
+import { useContext } from "react";
+import { AuthContext } from "../../../Auth/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 
 function ConstellationCard(props) {
+	const { user } = useContext(AuthContext);
+	const navigate = useNavigate();
 	let capName = props.name.split(" ");
-	// console.log("constellation:", { props });
-	// console.log({ capName });
 	const newName = capName.map((name) => {
 		const cap = name[0].toUpperCase();
 		const ame = name.slice(1);
@@ -12,6 +15,18 @@ function ConstellationCard(props) {
 	});
 	capName = newName.join(" ");
 	// console.log({ capName });
+
+	const getChart = async () => {
+		const data = {
+			style: "default",
+			observer: {
+				latitude: 33.775867,
+				longitude: -84.39733,
+				date: "2023-03-23",
+			},
+			view: { type: "constellation", parameters: { constellation: "ori" } },
+		};
+	};
 
 	const trackEntity = async () => {
 		const payload = {
@@ -51,16 +66,21 @@ function ConstellationCard(props) {
 
 	return (
 		<article className="constellation-card">
-			<h4>I am a constellation card</h4>
 			<h3>{capName}</h3>
 			{props.entity.is_tracked ? (
 				<div>
-					<p>This is already tracked</p>
-					<button onClick={untrackEntity}>Untrack</button>
+					<p>Currently tracking</p>
+					<button onClick={untrackEntity}>Stop tracking?</button>
 				</div>
 			) : (
 				<div>
-					<button onClick={trackEntity}>Track Entity</button>
+					{user.username ? (
+						<button onClick={trackEntity}>Track Entity</button>
+					) : (
+						<button onClick={() => navigate("/login")}>
+							Log in to track entity
+						</button>
+					)}
 				</div>
 			)}
 		</article>
