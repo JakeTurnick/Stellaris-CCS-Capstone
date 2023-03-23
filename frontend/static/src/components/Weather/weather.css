@@ -4,6 +4,7 @@
 
 #weather-view-choice {
     list-style: none;
+
 }
 #weather-view-choice > * {
     display: inline;
@@ -19,7 +20,7 @@
     text-align: center;
     align-items: start;
     text-align: center;
-    max-width: 300px;
+    width: 275px;
 }
 
 .weather-card-ul {
@@ -41,7 +42,14 @@
 .weather-week-ul {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .weather-week-ul > * {
     margin: 1rem;
+}
+
+.weather-today {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

@@ -103,7 +103,7 @@ function NewWeatherPage(props) {
 		const data = await response.json();
 		// console.log("moon data: ", data.data);
 		// setMoonSRC(data.data.imageUrl);
-		const testSRC = await data.data.imageUrl;
+		const testSRC = data.data.imageUrl;
 		return testSRC;
 		// console.log(moonSRC)
 	};
@@ -147,9 +147,7 @@ function NewWeatherPage(props) {
 	// let weekForecastHTML;
 
 	const getWeeksWeather = async (e) => {
-		if (e) {
-			e.preventDefault();
-		}
+		e.preventDefault();
 
 		const KEY = process.env.REACT_APP_WEATHER_API_KEY;
 		const WEATHER_BASE_URL = "http://api.weatherapi.com/v1";
@@ -163,76 +161,53 @@ function NewWeatherPage(props) {
 			throw new Error("could not fetch weather forecast", response);
 		}
 		const data = await response.json();
-		console.log("weekly weather", await data);
+		console.log("weekly weather", data);
 
-		// Get Moon phase as well -
-		const currDT = await data.location.localtime.split(" ");
-		const currDate = currDT[0];
-		// console.log(currDT);
-
-		let testWeek = [];
-		const moonWeek = await data.forecast.forecastday.map(async (day) => {
-			const src = await getMoon(data.location.lat, data.location.lon, day.date);
-
-			const testDay = await {
-				...day,
-				src,
-			};
-			// const updatedDay = { ...day };
-			// updatedDay.src = await src;
-			testWeek.push(testDay);
-			// console.log({ testDay });
-			return testDay;
-		});
-
-		// console.log({ moonWeek });
-		console.log({ testWeek });
-		setWeatherWeek(testWeek);
-		// setDummy( testWeek);
+		const days = data.forecast.forecastday; // array
+		const modifiedDays = await Promise.all(
+			days.map(async (day) => {
+				const src = await getMoon(
+					data.location.lat,
+					data.location.lon,
+					day.date
+				);
+				const updatedDay = { ...day, src };
+				return updatedDay;
+			})
+		);
+		console.log({ modifiedDays });
+		setWeatherWeek(modifiedDays);
 	};
-
-	// useEffect(() => {
-	// 	console.log({ weatherWeek });
-	// }, [weatherWeek]);
-
-	const getWeek = () => {
-		setView("week");
-	};
-
-	// Current weather - pull from default zip, default to today's date
-	// Weather by date/location - change date/location a pull weather
-	// Events on that day
-	// This could be user plans/trackedEvents
 
 	const weekForecastHTML = weatherWeek?.map((day) => (
-		<WeeklyWeatherCard day={day} />
+		<WeeklyWeatherCard day={day} key={nanoid()} />
 	));
 
-	console.log({ weekForecastHTML });
+	console.log({ weatherWeek });
 	return (
 		<div id="weather-page">
 			<h1>View weather for:</h1>
-			<ul id="weather-view-choice">
+			<nav id="weather-view-choice">
 				<li>
 					<button onClick={() => setView("today")} value="today">
 						Today
 					</button>
 				</li>
 				<li>
-					<button onClick={getWeek} value="week">
+					<button onClick={() => setView("week")} value="week">
 						This week
 					</button>
 				</li>
-				<li>
+				{/* <li>
 					<button onClick={() => setView("lookup")} value="lookup">
 						Date lookup
 					</button>
-				</li>
-			</ul>
-			<h3>Current view: {view}</h3>
+				</li> */}
+			</nav>
+			{/* <h3>Current view: {view}</h3> */}
 			{view === "today" ? (
 				<div className="weather-today">
-					<h1>Today's view</h1>
+					<h2>Today's view</h2>
 					<form onSubmit={getCurrentWeather}>
 						<label htmlFor="zip">Zip code:</label>
 						<input
@@ -253,7 +228,7 @@ function NewWeatherPage(props) {
 				</div>
 			) : view === "week" ? (
 				<div className="weather-week">
-					<h1>This week's weather</h1>
+					<h2>This week's weather</h2>
 					<form onSubmit={getWeeksWeather}>
 						<label htmlFor="zip">Zip code:</label>
 						<input

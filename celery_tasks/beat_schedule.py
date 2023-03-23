@@ -6,10 +6,10 @@ beat_schedule = {
     #     'task': 'celery_tasks.tasks.hello_world',
     #     'schedule': timedelta(minutes=1),
     # },
-    # 'get_upcomming_plan': {
-    #     'task': 'accounts.tasks.get_upcomming_plan',
-    #     'schedule': timedelta(seconds=10)
-    # },
+    'get_upcomming_plan': {
+        'task': 'accounts.tasks.get_upcomming_plan',
+        'schedule': timedelta(minutes=1)
+    },
     # 'print_tomorrow': {
     #     'task': 'accounts.tasks.print_tomorrow',
     #     'schedule': crontab(minute=[7, 9, 11, 13])

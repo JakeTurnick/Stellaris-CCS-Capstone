@@ -58,7 +58,7 @@ def get_upcomming_plan():
         print(plan)
         message = client.messages \
             .create(
-                body=f"Don't forget about your plan tomorrow - \n{plan.title}: {plan.notes} \nBy: {plan.user}",
+                body=f"Don't forget about your plan tomorrow - \n{plan.title}:\n {plan.notes} \n\nBy: {plan.user}",
                 from_='+18888366273',
                 to='+12036152581'
             )

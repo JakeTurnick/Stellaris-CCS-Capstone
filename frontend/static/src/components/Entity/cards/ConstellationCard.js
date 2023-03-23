@@ -26,6 +26,8 @@ function ConstellationCard(props) {
 			},
 			view: { type: "constellation", parameters: { constellation: "ori" } },
 		};
+
+		const chartURL = "https://api.astronomyapi.com/api/v2/studio/star-chart";
 	};
 
 	const trackEntity = async () => {

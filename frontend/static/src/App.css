@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,400;0,600;1,100;1,400;1,600&family=Oswald:wght@300;400;700&family=Rubik:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
+
 :root {
   /* background-color: #000334; */
   background-image:
@@ -7,6 +9,10 @@
   radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
   background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Rubik', sans-serif;
 }
 
 * {
@@ -64,6 +70,15 @@ div.slide-pane__header {
 div.slide-pane__content {
   background-color: #000334;
 }
+
+.slide-pane__title {
+  font-family: 'Montserrat', sans-serif;
+}
+.slide-pane__subtitle {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
 
 #treeline {
   position: absolute;

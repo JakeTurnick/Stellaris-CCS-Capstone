@@ -13,6 +13,11 @@ button {
 }
 .menu-btn:hover {
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+.menu-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }
 
 #main-nav {
