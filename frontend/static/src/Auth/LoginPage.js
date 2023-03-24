@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./Auth.css";
 
@@ -11,6 +12,7 @@ const INITIAL_LOGIN = {
 function LoginPage(props) {
 	const { isAuth, user, login, logout } = useContext(AuthContext);
 	const [loginForm, setLoginForm] = useState(INITIAL_LOGIN);
+	const navigate = useNavigate();
 
 	const handleInput = (e) => {
 		const { name, value } = e.target;
@@ -62,7 +64,9 @@ function LoginPage(props) {
 						Log in
 					</button>
 					<h3>Don't have an account?</h3>
-					<button id="register-redirect">Register</button>
+					<button onClick={() => navigate("/register")} id="register-redirect">
+						Register
+					</button>
 				</form>
 			)}
 		</div>
