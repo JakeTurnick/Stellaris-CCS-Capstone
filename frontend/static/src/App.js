@@ -63,8 +63,9 @@ function App() {
 			<Routes>
 				<Route path="admin-entity" element={<AdminEntity />} />
 				<Route path="login" element={<LoginPage />} />
+				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />
-				<Route path="/" element={<div>Home</div>} />
+				{/* <Route path="/" element={<div>Home</div>} /> */}
 				<Route path="weather" element={<NewWeatherPage />} />
 				<Route path="entities" element={<EntityPage />} />
 				<Route path="profile" element={<ProfilePage />} />
@@ -76,7 +77,11 @@ function App() {
 				{/* home page */}
 				{/* </Route> */}
 			</Routes>
-			<img id="treeline" src="frontend/static/src/media/treeline-silhouette.png" alt="" />
+			<img
+				id="treeline"
+				src="frontend/static/src/media/treeline-silhouette.png"
+				alt=""
+			/>
 		</div>
 	);
 }
