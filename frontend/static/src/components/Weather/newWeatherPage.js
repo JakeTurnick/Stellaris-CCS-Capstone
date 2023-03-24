@@ -114,7 +114,7 @@ function NewWeatherPage(props) {
 		}
 
 		const KEY = process.env.REACT_APP_WEATHER_API_KEY;
-		const WEATHER_BASE_URL = "http://api.weatherapi.com/v1";
+		const WEATHER_BASE_URL = "https://api.weatherapi.com/v1";
 		const WEATHER_PARAMS = `/current.json?key=${KEY}&q=${weatherForm.zip}&aqi=no`;
 
 		const weatherUrl = WEATHER_BASE_URL + WEATHER_PARAMS;
@@ -150,7 +150,7 @@ function NewWeatherPage(props) {
 		e.preventDefault();
 
 		const KEY = process.env.REACT_APP_WEATHER_API_KEY;
-		const WEATHER_BASE_URL = "http://api.weatherapi.com/v1";
+		const WEATHER_BASE_URL = "https://api.weatherapi.com/v1";
 		const WEATHER_PARAMS = `/forecast.json?key=${KEY}&q=${weatherForm.zip}&days=14&aqi=no&alerts=no`;
 
 		const weatherUrl = WEATHER_BASE_URL + WEATHER_PARAMS;

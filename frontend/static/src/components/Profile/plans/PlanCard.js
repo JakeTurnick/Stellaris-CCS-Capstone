@@ -64,7 +64,7 @@ function PlanCard(props) {
 
 	const getAstro = async (e) => {
 		const KEY = process.env.REACT_APP_WEATHER_API_KEY;
-		const WEATHER_BASE_URL = "http://api.weatherapi.com/v1";
+		const WEATHER_BASE_URL = "https://api.weatherapi.com/v1";
 		const WEATHER_PARAMS = `/astronomy.json?key=${KEY}&q=${user.default_zip}&dt=${plan.date}`;
 
 		const weatherUrl = WEATHER_BASE_URL + WEATHER_PARAMS;
