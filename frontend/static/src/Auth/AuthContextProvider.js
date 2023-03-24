@@ -35,7 +35,7 @@ function AuthContextProvider({ children }) {
 			pk: data.pk,
 		});
 		setIsAuth(true);
-		setTimeout(navigate("/profile"), 500);
+		setTimeout(navigate("/plans"), 500);
 		// navigate("/profile");
 	};
 

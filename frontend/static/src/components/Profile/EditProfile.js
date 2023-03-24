@@ -83,8 +83,8 @@ function EditProfile(props) {
 
 	return (
 		<div>
-			<button onClick={() => setEditMode(true)}>Edit mode</button>
-			<button onClick={() => setEditMode(false)}>not Edit mode</button>
+			{/* <button onClick={() => setEditMode(true)}>Edit mode</button>
+			<button onClick={() => setEditMode(false)}>not Edit mode</button> */}
 			{editMode ? (
 				<form onSubmit={submitProfile} className="edit-profile-form">
 					{/* <div className="profile-user">
@@ -137,6 +137,7 @@ function EditProfile(props) {
 								</div>
 							)}
 						</div>
+						<button onClick={() => setEditMode(false)}>Cancel</button>
 						<button type="submit">Update profile</button>
 					</section>
 				</form>
@@ -157,9 +158,7 @@ function EditProfile(props) {
 					<div className="profile-info">
 						<div>
 							<p className="info-title">Display name:</p>
-							<p className="info-field">
-								{profile.display_name}
-							</p>
+							<p className="info-field">{profile.display_name}</p>
 						</div>
 						<div>
 							<p className="info-title">Default zip:</p>
@@ -170,7 +169,6 @@ function EditProfile(props) {
 							<p className="info-field">{profile.bio}</p>
 						</div>
 
-						
 						<button className="edit-info-btn" onClick={() => setEditMode(true)}>
 							Edit info
 						</button>

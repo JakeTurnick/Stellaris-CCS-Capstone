@@ -103,14 +103,14 @@ class UserPlanAPIView(APIView):
         serializer = PlanSerializer(request.user)
         return Response(serializer.data)
 
-    # def put(self, request):
-    #     user = request.user
-    #     plan_id = request.data['plan']
-    #     plan = Plan.objects.get(pk=plan_id)
-    #     user.plans.add(plan)
-    #     user.save()
-    #     serializer = PlanSerializer(user)
-    #     return Response(serializer.data)
+    def put(self, request):
+        user = request.user
+        plan_id = request.data['plan']
+        plan = Plan.objects.get(pk=plan_id)
+        user.plans.add(plan)
+        user.save()
+        serializer = PlanSerializer(user)
+        return Response(serializer.data)
 
 
 class CreateUserProfileAPIView(generics.CreateAPIView):
@@ -162,7 +162,7 @@ class PlanListAPIView(generics.ListAPIView):
         return Plan.objects.filter(user=self.request.user)
 
 
-class PlanDetailAPIView(generics.RetrieveUpdateAPIView):
+class PlanDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PlanSerializer
 
     def get_queryset(self):

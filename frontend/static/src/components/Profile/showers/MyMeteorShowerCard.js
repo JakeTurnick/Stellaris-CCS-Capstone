@@ -36,7 +36,7 @@ function MyMeteorShowerCard(props) {
 		<article className="constellation-card">
 			<h3>{capName}</h3>
 			<p>Viewable on - {props.entity.date}</p>
-			<button onClick={untrackEntity}>Stop Tracking</button>
+			<button onClick={untrackEntity}>Unfavorite</button>
 		</article>
 	);
 }

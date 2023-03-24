@@ -36,7 +36,7 @@ function MyConstellationCard(props) {
 	return (
 		<article className="constellation-card">
 			<h3>{capName}</h3>
-			<button onClick={untrackEntity}>Stop Tracking</button>
+			<button onClick={untrackEntity}>Unfavorite</button>
 		</article>
 	);
 }

@@ -1,3 +1,9 @@
+#plans-page {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
 .plan-form {
     display: flex;
     flex-direction: column;
@@ -20,6 +26,7 @@
     flex-direction: column;
     text-align: start;
     max-width: 250px;
+    min-height: 600px;
 }
 
 .plan-moon {

@@ -18,6 +18,10 @@ function RegisterPage(props) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (registerForm.password1 !== registerForm.password2) {
+			alert("Passwords do not match");
+			return;
+		}
 		console.log("register form", registerForm);
 		register(registerForm);
 	};
@@ -55,7 +59,7 @@ function RegisterPage(props) {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="password1">Confirm Password:</label>
+						<label htmlFor="password1">Confirm password:</label>
 						<input
 							id="password2"
 							className="form-control"
@@ -65,7 +69,7 @@ function RegisterPage(props) {
 							onChange={handleInput}
 						/>
 					</div>
-					<p>Optional Fields:</p>
+					<p id="optional-field">Optional Fields:</p>
 					<div className="form-group">
 						<label htmlFor="email">Email:</label>
 						<input
@@ -79,7 +83,7 @@ function RegisterPage(props) {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="default_zip">Default Zip:</label>
+						<label htmlFor="default_zip">Default zip:</label>
 						<input
 							id="default_zip"
 							className="form-control"

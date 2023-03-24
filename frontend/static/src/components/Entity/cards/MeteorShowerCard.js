@@ -60,13 +60,13 @@ function MeteorShowerCard(props) {
 			<p>Viewable on - {props.entity.date}</p>
 			{props.entity.is_tracked ? (
 				<div>
-					<p>Currently tracking</p>
-					<button onClick={untrackEntity}>Stop tracking?</button>
+					<p>Currently favorited</p>
+					<button onClick={untrackEntity}>Unfavorite?</button>
 				</div>
 			) : (
 				<div>
 					{user.username ? (
-						<button onClick={trackEntity}>Track Entity</button>
+						<button onClick={trackEntity}>Favorite {capName}</button>
 					) : (
 						<button onClick={() => navigate("/login")}>
 							Log in to track entity

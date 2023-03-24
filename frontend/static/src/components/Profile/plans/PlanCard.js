@@ -18,6 +18,26 @@ function PlanCard(props) {
 		}));
 	};
 
+	const deletePlan = async (e) => {
+		e.preventDefault();
+		const options = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRFToken": Cookies.get("csrftoken"),
+			},
+			body: JSON.stringify(plan),
+		};
+		const response = await fetch(
+			`/api_v1/accs/user/plans/${plan.pk}/`,
+			options
+		);
+		const data = await response.json();
+		console.log({ data });
+		props.getPlans();
+		setEditMode(false);
+	};
+
 	const updatePlan = async (e) => {
 		e.preventDefault();
 		const options = {
@@ -102,48 +122,55 @@ function PlanCard(props) {
 		// console.log(moonSRC)
 	};
 
+	if (!moon) {
+		return <div></div>;
+	}
 	return (
 		<li>
 			{editMode ? (
 				<form onSubmit={updatePlan} className="plan-form">
-                    <label htmlFor="title">Title:</label>
+					<label htmlFor="title">Title:</label>
 					<input
 						type="text"
 						name="title"
 						value={plan.title}
 						onChange={handleInput}
-                        className="edit-plan-title"
+						className="edit-plan-title"
 					/>
-                    <label htmlFor="date">Date:</label>
+					<label htmlFor="date">Date:</label>
 					<input
 						type="date"
 						name="date"
 						value={plan.date}
 						onChange={handleInput}
-                        className="edit-plan-date"
+						className="edit-plan-date"
 					/>
-                    <label htmlFor="notes">Notes:</label>
+					<label htmlFor="notes">Notes:</label>
 					<textarea
 						type="textarea"
 						name="notes"
 						value={plan.notes}
 						onChange={handleInput}
-                        className="edit-plan-notes"
-                        rows="3"
+						className="edit-plan-notes"
+						rows="3"
 					/>
 					<div className="edit-plan-btns">
-						<button onClick={() => setEditMode(false)}>Preview</button>
+						{/* <button onClick={() => setEditMode(false)}>Preview</button> */}
 						<button type="submit">Update</button>
 					</div>
 				</form>
 			) : (
 				<article className="plan-card">
-					<h2>I am a Plan card</h2>
-					<h3 className="plan-title">{plan.title}</h3>
-					<p className="plan-date">{plan.date}</p>
+					{/* <h2>I am a Plan card</h2> */}
+					<h2 className="plan-title">{plan.title}</h2>
+					<p className="plan-date">Date: {plan.date}</p>
+					<p>Notes:</p>
 					<p className="plan-notes">{plan.notes}</p>
 					<img src={moon} className="plan-moon" />
-					<button className="edit-plan-btn" onClick={() => setEditMode(true)}>Edit</button>
+					<button className="edit-plan-btn" onClick={() => setEditMode(true)}>
+						Edit
+					</button>
+					<button onClick={deletePlan}>Delete</button>
 					{/* <button onClick={getAstro}>Get astro</button> */}
 				</article>
 			)}
