@@ -1,0 +1,14 @@
+#too-much {
+    font-style: italic;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.text-link {
+    font-weight: 600;
+    text-decoration: dashed;
+
+}
+.text-link:hover {
+    background-color: red;
+}

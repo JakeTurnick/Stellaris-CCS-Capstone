@@ -4,6 +4,7 @@ import { AuthContext } from "./Auth/AuthContextProvider";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import AdminEntity from "./components/Entity/AdminEntity";
 import QAM from "./components/QAM/QAM";
+import HomePage from "./components/Home/HomePage";
 import LoginPage from "./Auth/LoginPage";
 import RegisterPage from "./Auth/Register";
 import WeatherPage from "./components/Weather/WeatherPage";
@@ -62,10 +63,10 @@ function App() {
 			{/* <QAM /> */}
 			<Routes>
 				<Route path="admin-entity" element={<AdminEntity />} />
+				<Route path="/" element={<HomePage />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />
-				{/* <Route path="/" element={<div>Home</div>} /> */}
 				<Route path="weather" element={<NewWeatherPage />} />
 				<Route path="entities" element={<EntityPage />} />
 				<Route path="profile" element={<ProfilePage />} />
