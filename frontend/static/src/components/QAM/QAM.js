@@ -55,9 +55,9 @@ function QAM(props) {
 			{/* <h2>Welcome - {user.username ? user.username : "to Stellaris"}</h2> */}
 			<nav id="main-nav">
 				{/* <button onClick={() => logout()}>My Profile</button> */}
-				{/* <button className="menu-btn" onClick={() => goHome()}>
+				<button className="menu-btn" onClick={() => goHome()}>
 					Home
-				</button> */}
+				</button>
 				<button className="menu-btn" onClick={() => goEntities()}>
 					Celestial Lookup
 				</button>

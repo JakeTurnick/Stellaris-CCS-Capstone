@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthContextProvider";
 import "./home-page.css"
 
@@ -6,10 +7,29 @@ import "./home-page.css"
 
 function HomePage(props) {
 	const { isAuth, user } = useContext(AuthContext);
-	const [weatherForm, setWeatherForm] = useState();
+	const navigate = useNavigate();
+
+	const logIn = () => {
+		navigate("/login");
+		props.closePane();
+	};
+	const goEntities = () => {
+		navigate("/entities");
+		props.closePane();
+	};
+	const goPlans = () => {
+		if (!isAuth) {
+			alert("you are not logged in")
+			logIn();
+			props.closePane();
+		}
+		navigate("/plans");
+		props.closePane();
+	};
+	
 
 	return (
-		<div>
+		<div id="home-page">
 			<h1>Welcome to Stellaris!</h1>
 
 			<article id="about">
@@ -34,8 +54,8 @@ function HomePage(props) {
 				</p>
 				<p>
 					We try to simplify this process as much as possible by keeping a collection of common entities
-					(which can be found in <a className="text-link" onClick={() => alert(alert)}>Celestial Lookup</a>)
-					and allowing you to track them or make you own <a className="text-link" onClick={() => alert(alert)}>plans</a>
+					(which can be found in <a className="text-link" onClick={() => goEntities()}>Celestial Lookup</a>)
+					and allowing you to track them or make you own <a className="text-link" onClick={() => goPlans()}>plans</a>
 				</p>
 
 			</article>
