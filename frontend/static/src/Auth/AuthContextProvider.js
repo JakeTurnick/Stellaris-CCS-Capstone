@@ -64,7 +64,8 @@ function AuthContextProvider({ children }) {
 			pk: data.pk,
 		});
 		setIsAuth(true);
-		setTimeout(navigate("/profile"), 500);
+		// setTimeout(navigate("/profile"), 500);
+		setTimeout(navigate("/entities"), 500);
 	};
 
 	const logout = async () => {
